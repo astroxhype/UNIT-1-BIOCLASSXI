@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIO UNIT 1 — 60HR ATLAS</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500;1,600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=cabinet-grotesk@100,200,300,400,500,600,700,800,900&f[]=chivo-mono@100,200,300,400&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070707;--surface:#0f0f0f;--border:#1a1a1a;--border2:#252525;
+  --text:#ebebeb;--muted:#444;--muted2:#666;
+  --c1:#c8ff00;--c2:#ff6b35;--c3:#00d4ff;--c4:#ff3d9a;
+  --accent:var(--c1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Chivo Mono','Space Mono',monospace;overflow-x:hidden;min-height:100vh}
+::selection{background:var(--c1);color:#000}
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* ══════════════════════════════ HOME ══════════════════════════════ */
+#home{min-height:100vh;overflow:hidden}
+
+/* ─────────────── HERO ─────────────── */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr auto;
+  padding:0;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* ── Atmospheric layers ── */
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(90px);z-index:0}
+.hero-orb-1{
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(200,255,0,.22) 0%,transparent 60%);
+  top:-300px;left:-200px;
+  animation:heroFloat 22s ease-in-out infinite;
+}
+.hero-orb-2{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(255,61,154,.15) 0%,transparent 60%);
+  bottom:-200px;right:-100px;
+  animation:heroFloat 28s ease-in-out infinite reverse;
+  animation-delay:-10s;
+}
+.hero-orb-3{
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(0,212,255,.12) 0%,transparent 60%);
+  top:30%;right:30%;
+  animation:heroFloat 18s ease-in-out infinite;
+  animation-delay:-6s;
+}
+@keyframes heroFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-50px) scale(1.08)}
+  66%{transform:translate(-25px,30px) scale(.93)}
+}
+
+/* Dot grid */
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 20%,transparent 100%);
+}
+
+/* Diagonal stripes */
+.hero-stripe{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(
+    -52deg,
+    rgba(255,255,255,.01) 0px,
+    rgba(255,255,255,.01) 1px,
+    transparent 1px,transparent 24px
+  );
+}
+
+/* Noise grain */
+.hero-noise{
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+  opacity:.03;mix-blend-mode:overlay;
+}
+
+/* Animated scan line */
+.hero-scan{
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,rgba(200,255,0,.6),transparent);
+  pointer-events:none;z-index:3;
+  animation:scanDown 6s linear infinite;
+  opacity:.5;
+}
+@keyframes scanDown{
+  0%{top:-2px;opacity:0}
+  5%{opacity:.5}
+  95%{opacity:.5}
+  100%{top:100%;opacity:0}
+}
+
+/* ── LEFT PANEL ── */
+.hero-left{
+  grid-column:1;grid-row:1;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 0 72px 72px;
+  position:relative;z-index:2;
+}
+
+/* vertical timeline bar */
+.hero-vbar{
+  position:absolute;left:32px;top:80px;bottom:80px;
+  width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(200,255,0,.5) 20%,rgba(200,255,0,.2) 80%,transparent);
+}
+.hero-vbar::before{
+  content:'';
+  position:absolute;top:0;left:-3px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--c1);
+  box-shadow:0 0 12px var(--c1),0 0 30px var(--c1);
+  animation:vbarPulse 2.5s ease-in-out infinite;
+}
+@keyframes vbarPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.7)}
+}
+.hero-vbar::after{
+  content:'';
+  position:absolute;bottom:0;left:-3px;
+  width:7px;height:7px;border-radius:50%;
+  border:1px solid rgba(200,255,0,.4);
+}
+
+/* Eyebrow */
+.hero-eyebrow{
+  position:relative;z-index:2;
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:9px;letter-spacing:.4em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);
+  margin-bottom:32px;
+  animation:fadeSlideUp .8s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-eyebrow .eyebrow-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 10px;
+  border:1px solid rgba(200,255,0,.25);
+  border-radius:100px;
+  background:rgba(200,255,0,.06);
+  color:var(--c1);
+}
+.eyebrow-blink{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--c1);
+  box-shadow:0 0 8px var(--c1);
+  animation:pulse 1.8s ease-in-out infinite;
+}
+
+/* Giant stacked title */
+.hero h1{
+  position:relative;z-index:2;
+  font-family:'Clash Display','Space Grotesk',sans-serif;
+  font-size:clamp(72px,13vw,175px);
+  font-weight:700;line-height:.80;
+  letter-spacing:-7px;
+  color:var(--text);
+  margin-bottom:52px;
+}
+.hero h1 .word-bio{
+  display:block;
+  animation:fadeSlideUp .7s cubic-bezier(.22,1,.36,1) .1s both;
+}
+.hero h1 .word-unit{
+  display:block;
+  color:rgba(255,255,255,.25);
+  -webkit-text-stroke:1px rgba(255,255,255,.15);
+  animation:fadeSlideUp .7s cubic-bezier(.22,1,.36,1) .22s both;
+}
+.hero h1 em{
+  display:block;
+  font-style:normal;
+  color:transparent;
+  -webkit-text-stroke:2px var(--c1);
+  position:relative;
+  animation:fadeSlideUp .7s cubic-bezier(.22,1,.36,1) .34s both;
+}
+.hero h1 em::after{
+  content:attr(data-text);
+  position:absolute;left:0;top:0;
+  color:var(--c1);
+  -webkit-text-stroke:0;
+  clip-path:inset(0 100% 0 0);
+  animation:textReveal 2.2s cubic-bezier(.22,1,.36,1) .9s forwards;
+  text-shadow:0 0 60px rgba(200,255,0,.4);
+}
+@keyframes textReveal{to{clip-path:inset(0 0% 0 0)}}
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Stats pill bar */
+.hero-sub{
+  position:relative;z-index:2;
+  display:flex;gap:0;align-items:stretch;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  overflow:hidden;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.03);
+  width:fit-content;
+  animation:fadeSlideUp .7s cubic-bezier(.22,1,.36,1) .5s both;
+}
+.hero-stat{
+  padding:16px 28px;
+  border-right:1px solid rgba(255,255,255,.06);
+  text-align:left;
+  position:relative;
+}
+.hero-stat:last-child{border-right:none}
+.hero-stat .num{
+  font-family:'Clash Display','Space Grotesk',sans-serif;
+  font-size:34px;font-weight:700;line-height:1;
+  color:var(--text);
+  letter-spacing:-2px;
+}
+.hero-stat:first-child .num{color:var(--c1);text-shadow:0 0 25px rgba(200,255,0,.45)}
+.hero-stat .lbl{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:7px;letter-spacing:.28em;color:rgba(255,255,255,.2);
+  text-transform:uppercase;margin-top:3px;
+}
+.hero-div{display:none}
+
+/* ── RIGHT PANEL ── */
+.hero-right{
+  grid-column:2;grid-row:1;
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+/* Giant rotated BIOLOGY word */
+.hero-bigword{
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;font-weight:700;
+  font-size:clamp(100px,14vw,200px);
+  line-height:1;letter-spacing:-.05em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.06);
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  user-select:none;
+  position:relative;z-index:2;
+  animation:fadeIn 1.5s ease both;
+  text-shadow:none;
+  transition:-webkit-text-stroke-color 3s;
+}
+.hero-bigword::after{
+  content:'BIOLOGY';
+  position:absolute;
+  inset:0;
+  -webkit-text-stroke:0;
+  color:transparent;
+  background:linear-gradient(
+    to bottom,
+    rgba(200,255,0,.0) 0%,
+    rgba(200,255,0,.12) 40%,
+    rgba(0,212,255,.08) 70%,
+    transparent 100%
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  animation:fadeIn 2s ease .5s both;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* Chapter index floating in right panel */
+.hero-index{
+  position:absolute;bottom:72px;right:56px;
+  display:flex;flex-direction:column;gap:10px;
+  z-index:3;
+  animation:fadeSlideUp .8s cubic-bezier(.22,1,.36,1) .7s both;
+}
+.hero-index-item{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+  transition:color .3s;
+  cursor:pointer;
+}
+.hero-index-item:hover{color:rgba(255,255,255,.6)}
+.hero-index-dot{
+  width:4px;height:4px;border-radius:50%;
+  flex-shrink:0;
+  transition:box-shadow .3s;
+}
+.hero-index-item:hover .hero-index-dot{box-shadow:0 0 8px currentColor}
+
+/* Scrolldown hint */
+.hero-scroll{
+  grid-column:1/-1;grid-row:2;
+  position:relative;z-index:2;
+  display:flex;align-items:center;gap:10px;
+  padding:20px 72px;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:8px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.15);
+  border-top:1px solid rgba(255,255,255,.05);
+  animation:fadeIn 1s ease 1s both;
+}
+.hero-scroll-line{
+  width:1px;height:24px;
+  background:linear-gradient(to bottom,rgba(200,255,0,.5),transparent);
+  animation:scrollBob 2s ease-in-out infinite;
+}
+@keyframes scrollBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ── TICKER STRIP ── */
+.hero-ticker{
+  position:relative;z-index:2;
+  overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:10px 0;
+  background:rgba(255,255,255,.015);
+  margin-bottom:0;
+}
+.ticker-track{
+  display:flex;gap:0;
+  white-space:nowrap;
+  animation:ticker 28s linear infinite;
+  width:max-content;
+}
+@keyframes ticker{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.ticker-item{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.18);
+  padding:0 32px;
+  display:inline-flex;align-items:center;gap:14px;
+}
+.ticker-dot{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--c1);
+  display:inline-block;
+}
+
+/* ── CHAPTERS SECTION ── */
+.home-body{padding:60px 56px 80px}
+
+.grid-label{
+  display:flex;align-items:center;gap:16px;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:9px;letter-spacing:.3em;color:rgba(255,255,255,.2);
+  text-transform:uppercase;margin-bottom:20px;
+}
+.grid-label::after{
+  content:'';
+  flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,.08),transparent);
+}
+.chapters-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:10px;
+}
+@media(max-width:900px){.chapters-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.chapters-grid{grid-template-columns:1fr}}
+
+/* Chapter cards */
+.ch-card{
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.07);
+  padding:28px 24px 22px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .3s;
+  min-height:320px;
+  display:flex;flex-direction:column;
+  isolation:isolate;
+  background:#0a0a0a;
+}
+.ch-card[data-ch="1"]{--accent:var(--c1)}
+.ch-card[data-ch="2"]{--accent:var(--c2)}
+.ch-card[data-ch="3"]{--accent:var(--c3)}
+.ch-card[data-ch="4"]{--accent:var(--c4)}
+
+/* Card orb */
+.ch-card::before{
+  content:'';
+  position:absolute;top:-60%;right:-30%;
+  width:85%;padding-top:85%;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    color-mix(in srgb,var(--accent) 35%,transparent) 0%,
+    transparent 65%
+  );
+  pointer-events:none;z-index:0;
+  transition:opacity .4s,transform .5s cubic-bezier(.22,1,.36,1);
+  opacity:.55;
+}
+.ch-card:hover::before{opacity:1;transform:scale(1.1)}
+
+/* Diagonal stripes */
+.ch-card::after{
+  content:'';
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(
+    -48deg,
+    rgba(255,255,255,.018) 0px,
+    rgba(255,255,255,.018) 1px,
+    transparent 1px,
+    transparent 20px
+  );
+}
+
+.ch-card:hover{
+  transform:translateY(-8px) scale(1.015);
+  border-color:color-mix(in srgb,var(--accent) 45%,transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--accent) 20%,transparent),
+    0 24px 60px -10px rgba(0,0,0,.8),
+    0 0 80px -16px color-mix(in srgb,var(--accent) 40%,transparent);
+}
+
+.card-bg-num{
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;font-weight:700;
+  font-size:120px;line-height:.85;letter-spacing:-.08em;
+  color:transparent;
+  -webkit-text-stroke:1px color-mix(in srgb,var(--accent) 14%,rgba(255,255,255,.04));
+  position:absolute;bottom:-16px;right:10px;
+  pointer-events:none;z-index:1;
+  transition:-webkit-text-stroke-color .4s,transform .5s cubic-bezier(.22,1,.36,1);
+}
+.ch-card:hover .card-bg-num{
+  -webkit-text-stroke-color:color-mix(in srgb,var(--accent) 40%,rgba(255,255,255,.06));
+  transform:scale(1.06) translateY(-8px);
+}
+
+.card-chip{
+  position:relative;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px 4px 8px;
+  border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+  background:color-mix(in srgb,var(--accent) 12%,rgba(0,0,0,.4));
+  color:var(--accent);
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  border-radius:100px;
+  margin-bottom:auto;
+  width:fit-content;
+  backdrop-filter:blur(4px);
+}
+.chip-dot{
+  width:5px;height:5px;
+  background:var(--accent);border-radius:50%;
+  box-shadow:0 0 6px var(--accent);
+  animation:pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.card-title{
+  position:relative;z-index:2;
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;font-weight:700;
+  font-size:clamp(1.3rem,2vw,1.65rem);
+  line-height:1.05;letter-spacing:-.03em;
+  color:rgba(255,255,255,.92);
+  margin-bottom:6px;
+  transition:color .3s;
+}
+.ch-card:hover .card-title{color:#fff}
+
+.card-sub{
+  position:relative;z-index:2;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+  margin-bottom:18px;
+  transition:color .3s;
+}
+.ch-card:hover .card-sub{color:rgba(255,255,255,.35)}
+
+.card-time{
+  position:relative;z-index:2;
+  margin-bottom:18px;
+}
+.card-time .hrs{
+  font-family:'Clash Display','Space Grotesk',sans-serif;
+  font-size:54px;font-weight:700;line-height:1;
+  letter-spacing:-3px;
+  color:var(--accent);
+  text-shadow:0 0 30px color-mix(in srgb,var(--accent) 50%,transparent);
+  transition:text-shadow .3s;
+}
+.ch-card:hover .card-time .hrs{
+  text-shadow:0 0 50px color-mix(in srgb,var(--accent) 80%,transparent);
+}
+.card-time .hrs-lbl{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:8px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+}
+
+.card-pills{
+  position:relative;z-index:2;
+  display:flex;flex-wrap:wrap;gap:4px;
+  margin-bottom:18px;
+}
+.pill{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:7px;padding:3px 8px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  color:rgba(255,255,255,.3);
+  letter-spacing:.08em;border-radius:4px;
+  transition:border-color .3s,color .3s;
+}
+.ch-card:hover .pill{
+  border-color:color-mix(in srgb,var(--accent) 20%,transparent);
+  color:rgba(255,255,255,.45);
+}
+
+.card-open{
+  position:relative;z-index:2;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.07);
+  opacity:0;transform:translateY(6px);
+  transition:opacity .3s,transform .3s,border-color .3s;
+}
+.ch-card:hover .card-open{
+  opacity:1;transform:translateY(0);
+  border-top-color:color-mix(in srgb,var(--accent) 22%,transparent);
+}
+.card-open .arrow{
+  font-size:1rem;
+  transition:transform .25s;
+}
+.ch-card:hover .card-open .arrow{transform:translateX(5px)}
+
+/* ── PROGRESS BAR ── */
+.prog-wrap{padding:28px 56px 32px;border-top:1px solid rgba(255,255,255,.05)}
+.prog-label{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:8px;letter-spacing:.25em;color:rgba(255,255,255,.2);
+  text-transform:uppercase;margin-bottom:14px;
+}
+.prog-bar{display:flex;height:4px;gap:3px;border-radius:4px;overflow:hidden}
+.prog-seg{height:100%;border-radius:2px;position:relative;cursor:pointer;transition:filter .2s,transform .2s}
+.prog-seg:hover{filter:brightness(1.4);transform:scaleY(1.8)}
+.prog-seg[data-ch="1"]{background:var(--c1);width:10%}
+.prog-seg[data-ch="2"]{background:var(--c2);width:20%}
+.prog-seg[data-ch="3"]{background:var(--c3);width:30%}
+.prog-seg[data-ch="4"]{background:var(--c4);width:33.3%}
+.prog-seg[data-ch="r"]{background:rgba(255,255,255,.1);width:6.7%}
+.prog-legend{display:flex;gap:20px;margin-top:10px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-family:'Chivo Mono','Space Mono',monospace;font-size:8px;color:rgba(255,255,255,.2);letter-spacing:.1em}
+.leg-dot{width:5px;height:5px;border-radius:50%}
+
+/* TIMETABLE */
+.tt-section{padding:70px 48px;border-top:1px solid var(--border);margin-top:60px}
+.tt-section h2{font-family:'Clash Display','Space Grotesk',sans-serif;font-weight:700;font-size:clamp(40px,6vw,80px);margin-bottom:8px;letter-spacing:-3px}
+.tt-desc{font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:40px}
+.tt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:2px}
+.tt-day{background:var(--surface);border:1px solid var(--border);padding:20px;cursor:default;transition:border-color .2s,background .2s;position:relative}
+.tt-day:hover{border-color:var(--day-col,var(--border2));background:#111}
+.tt-day::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--day-col,var(--border));opacity:.5}
+.day-n{font-family:'Clash Display','Space Grotesk',sans-serif;font-weight:700;font-size:44px;line-height:1;color:var(--border2);transition:color .2s}
+.tt-day:hover .day-n{color:var(--day-col,var(--muted))}
+.day-h{font-size:9px;color:var(--day-col,var(--muted2));letter-spacing:2px;text-transform:uppercase;margin:2px 0 8px}
+.day-t{font-size:10px;color:var(--muted);line-height:1.6}
+.day-t strong{color:var(--text);font-weight:400}
+
+/* FOOTER */
+footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:gap}
+footer span{font-size:9px;color:var(--muted);letter-spacing:2px}
+
+/* ══════════════════════════════ CHAPTER TOPIC VIEW ══════════════════════════════ */
+#nodemap{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;flex-direction:column;overflow-y:auto}
+#nodemap.active{display:flex}
+
+.nm-header{padding:20px 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:20px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);z-index:10}
+.nm-left{display:flex;align-items:center;gap:20px}
+.nm-tag{padding:4px 12px;font-size:8px;letter-spacing:3px;text-transform:uppercase;border:1px solid var(--nm-accent,var(--c1));color:var(--nm-accent,var(--c1))}
+.nm-title{font-family:'Cabinet Grotesk','Space Grotesk',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.5px}
+.nm-hrs{font-size:10px;color:var(--muted);letter-spacing:2px}
+.nm-back{padding:9px 20px;border:1px solid var(--border2);background:none;color:var(--muted);font-family:'Chivo Mono','Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.nm-back:hover{border-color:var(--text);color:var(--text)}
+
+/* TOPIC CARDS GRID */
+.topics-body{padding:40px 48px 60px;flex:1}
+.topics-hero{margin-bottom:48px}
+.topics-hero-eyebrow{font-size:9px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+.topics-hero-h{font-family:'Clash Display','Space Grotesk',sans-serif;font-weight:700;font-size:clamp(40px,7vw,90px);line-height:.85;letter-spacing:-4px;color:var(--text)}
+.topics-hero-h em{font-style:normal;color:var(--nm-accent,var(--c1))}
+.topics-hero-meta{display:flex;gap:32px;margin-top:20px;flex-wrap:wrap;align-items:center}
+.topics-stat .n{font-family:'Clash Display','Space Grotesk',sans-serif;font-weight:700;font-size:40px;line-height:1;color:var(--text)}
+.topics-stat .l{font-size:8px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+.topics-divider{width:1px;height:36px;background:var(--border2)}
+
+.topics-grid-label{font-size:9px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:16px}
+.topics-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+@media(max-width:1100px){.topics-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.topics-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.topics-grid{grid-template-columns:1fr}}
+
+/* ══ SEXY CARD ══ */
+.tp-card{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border-radius:18px;
+  cursor:pointer;
+  position:relative;
+  background:var(--tp-bg,#0a0f0a);
+  border:1px solid rgba(255,255,255,.06);
+  transition:
+    transform .5s cubic-bezier(.22,1,.36,1),
+    box-shadow .5s cubic-bezier(.22,1,.36,1),
+    border-color .4s;
+  isolation:isolate;
+}
+/* Shimmer sweep on hover */
+.tp-card::before{
+  content:'';
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,255,255,.04) 50%,
+    transparent 70%
+  );
+  background-size:200% 100%;
+  background-position:200% 0;
+  transition:background-position .7s ease;
+}
+.tp-card:hover::before{background-position:-20% 0}
+/* Bottom glow beam */
+.tp-card::after{
+  content:'';
+  position:absolute;bottom:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--tp-badge-color),transparent);
+  opacity:0;
+  transition:opacity .5s;
+  filter:blur(1px);
+}
+.tp-card:hover{
+  transform:translateY(-6px) scale(1.012);
+  border-color:color-mix(in srgb, var(--tp-badge-color) 35%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--tp-badge-color) 20%, transparent),
+    0 20px 60px -10px rgba(0,0,0,.7),
+    0 0 80px -20px color-mix(in srgb, var(--tp-badge-color) 25%, transparent);
+}
+.tp-card:hover::after{opacity:1}
+
+/* ── VISUAL PANEL — now the whole card ── */
+.tp-visual{
+  padding:1.2rem 1.3rem 1.1rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+  min-height:200px;
+  flex:1;
+  background:linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--tp-badge-color) 9%, #080808) 0%,
+    #0a0a0a 55%,
+    color-mix(in srgb, var(--tp-badge-color) 4%, #060606) 100%
+  );
+}
+/* Diagonal color slash */
+.tp-visual-grid{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--tp-badge-color) 12%, transparent) 0%,
+      transparent 45%
+    );
+}
+/* Fine dot grid */
+.tp-visual-noise{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:18px 18px;
+  mask-image:linear-gradient(to bottom right,rgba(0,0,0,.5),transparent 70%);
+}
+/* Orbs */
+.tp-visual-orb{position:absolute;border-radius:50%;pointer-events:none;animation:orbFloat ease-in-out infinite;z-index:0}
+.tp-orb-1{
+  width:180px;height:180px;
+  background:radial-gradient(circle,color-mix(in srgb,var(--tp-badge-color) 40%,transparent),transparent 70%);
+  top:-70px;right:-60px;
+  filter:blur(40px);
+  animation-duration:14s;
+}
+.tp-orb-2{
+  width:100px;height:100px;
+  background:radial-gradient(circle,color-mix(in srgb,var(--tp-badge-color) 25%,transparent),transparent 70%);
+  bottom:-30px;left:-20px;
+  filter:blur(30px);
+  animation-duration:20s;animation-delay:-7s;
+}
+@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.05)}}
+
+/* Ghost number */
+.tp-ghost-num{
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;font-weight:700;
+  font-size:6.5rem;
+  line-height:.78;letter-spacing:-.08em;
+  color:transparent;
+  -webkit-text-stroke:1px color-mix(in srgb,var(--tp-badge-color) 22%,transparent);
+  position:absolute;bottom:-1rem;right:.5rem;
+  pointer-events:none;user-select:none;z-index:1;
+  transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .5s,filter .5s;
+  opacity:.7;
+  filter:blur(.4px);
+}
+.tp-card:hover .tp-ghost-num{
+  transform:scale(1.08) translateY(-8px);
+  -webkit-text-stroke-color:color-mix(in srgb,var(--tp-badge-color) 55%,transparent);
+  opacity:1;
+  filter:blur(0);
+}
+
+/* top row */
+.tp-visual-top{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.tp-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:color-mix(in srgb,var(--tp-badge-color) 14%,rgba(0,0,0,.4));
+  color:var(--tp-badge-color);
+  border:1px solid color-mix(in srgb,var(--tp-badge-color) 35%,transparent);
+  padding:.24rem .7rem;border-radius:100px;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  backdrop-filter:blur(6px);
+}
+.tp-badge-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--tp-badge-color);
+  box-shadow:0 0 6px var(--tp-badge-color);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+.tp-issue-tag{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.52rem;letter-spacing:.1em;
+  color:rgba(255,255,255,.22);text-transform:uppercase;
+}
+
+/* bottom of visual */
+.tp-visual-bottom{position:relative;z-index:2;margin-top:auto}
+.tp-journal{
+  font-size:.48rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);margin-bottom:.5rem;
+}
+.tp-year-big{
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;font-weight:700;
+  font-size:clamp(1.05rem,1.8vw,1.35rem);
+  color:rgba(255,255,255,.92);
+  letter-spacing:-.03em;line-height:1.1;
+  margin-bottom:.85rem;
+  transition:color .3s;
+}
+.tp-card:hover .tp-year-big{color:#fff}
+.tp-card.tp-complete .tp-year-big{
+  color:var(--tp-badge-color);
+}
+
+/* Progress row */
+.tp-prog-row{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:.7rem;
+}
+.tp-prog-track{
+  flex:1;height:2px;border-radius:2px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.tp-prog-fill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--tp-badge-color),color-mix(in srgb,var(--tp-badge-color) 60%,#fff));
+  box-shadow:0 0 8px var(--tp-badge-color);
+  transition:width .5s cubic-bezier(.22,1,.36,1);
+}
+.tp-prog-label{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.42rem;font-weight:700;letter-spacing:.08em;
+  color:var(--tp-badge-color);opacity:.7;
+  white-space:nowrap;
+}
+
+/* Card footer CTA */
+.tp-card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:.6rem;
+  border-top:1px solid rgba(255,255,255,.06);
+  transition:border-color .3s;
+}
+.tp-card:hover .tp-card-footer{
+  border-top-color:color-mix(in srgb,var(--tp-badge-color) 20%,transparent);
+}
+.tp-card-cta{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.44rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+  transition:color .3s;
+}
+.tp-card:hover .tp-card-cta{color:var(--tp-badge-color)}
+.tp-card-arrow{
+  font-size:.7rem;
+  color:rgba(255,255,255,.15);
+  transform:translateX(-4px);
+  transition:color .3s,transform .3s;
+}
+.tp-card:hover .tp-card-arrow{
+  color:var(--tp-badge-color);
+  transform:translateX(0);
+}
+
+/* ── SUBTOPIC LIST INSIDE VISUAL PANEL ── */
+.tp-sub-list{
+  display:flex;flex-direction:column;gap:3px;
+  position:relative;z-index:2;
+}
+.tp-sub-row{
+  display:flex;align-items:baseline;gap:7px;
+  padding:4px 8px 4px 6px;
+  border-radius:7px;
+  border-left:1.5px solid rgba(255,255,255,.07);
+  background:rgba(0,0,0,.18);
+  transition:border-color .3s,background .3s;
+  overflow:hidden;
+  position:relative;
+}
+.tp-sub-row.tsr-done{
+  border-left-color:var(--tp-badge-color);
+  background:color-mix(in srgb,var(--tp-badge-color) 7%,rgba(0,0,0,.25));
+}
+.tp-card:hover .tp-sub-row{
+  background:rgba(0,0,0,.28);
+}
+.tp-sub-n{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.38rem;font-weight:700;letter-spacing:.1em;
+  color:rgba(255,255,255,.18);flex-shrink:0;
+  transition:color .3s;
+}
+.tp-sub-row.tsr-done .tp-sub-n{
+  color:var(--tp-badge-color);opacity:.7;
+}
+.tp-sub-text{
+  font-family:'Cabinet Grotesk','Space Grotesk',sans-serif;
+  font-size:.6rem;font-weight:500;letter-spacing:-.01em;
+  color:rgba(255,255,255,.5);line-height:1.25;
+  flex:1;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:color .3s;
+}
+.tp-sub-row.tsr-done .tp-sub-text{
+  color:rgba(255,255,255,.22);
+  text-decoration:line-through;
+  text-decoration-color:color-mix(in srgb,var(--tp-badge-color) 40%,transparent);
+}
+/* checkmark badge on done row */
+.tp-sub-check{
+  width:11px;height:11px;border-radius:50%;flex-shrink:0;
+  background:var(--tp-badge-color);
+  display:none;align-items:center;justify-content:center;
+  box-shadow:0 0 6px var(--tp-badge-color);
+}
+.tp-sub-row.tsr-done .tp-sub-check{display:flex}
+.tp-sub-check::after{
+  content:'';
+  display:block;width:5px;height:5px;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='1.5,6 4.5,9.5 10.5,2.5' stroke='%23050505' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.tp-sub-more{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.42rem;font-weight:700;letter-spacing:.1em;
+  color:rgba(255,255,255,.18);margin-top:3px;
+  padding-left:6px;
+}
+/* staggered slide-in for rows when card appears */
+.tp-sub-row{
+  animation:subRowIn .45s cubic-bezier(.22,1,.36,1) both;
+}
+.tp-sub-list .tp-sub-row:nth-child(1){animation-delay:.05s}
+.tp-sub-list .tp-sub-row:nth-child(2){animation-delay:.1s}
+.tp-sub-list .tp-sub-row:nth-child(3){animation-delay:.15s}
+.tp-sub-list .tp-sub-row:nth-child(4){animation-delay:.2s}
+.tp-sub-list .tp-sub-row:nth-child(5){animation-delay:.25s}
+@keyframes subRowIn{
+  from{opacity:0;transform:translateX(-8px)}
+  to{opacity:1;transform:translateX(0)}
+}
+/* row hover: slide accent bar in */
+.tp-sub-row::before{
+  content:'';
+  position:absolute;top:0;left:0;bottom:0;width:0;
+  background:var(--tp-badge-color);
+  opacity:.12;
+  transition:width .25s ease;
+  border-radius:0 4px 4px 0;
+}
+.tp-card:hover .tp-sub-row:hover::before{width:100%}
+
+/* ── BODY PANEL ── */
+.tp-body{
+  padding:.9rem 1.15rem 1.1rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+  background:color-mix(in srgb,var(--tp-bg,#080d08) 60%,#050505);
+  position:relative;overflow:hidden;
+  flex:1;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+/* Subtle left glow bar */
+.tp-body::before{
+  content:'';
+  position:absolute;top:0;left:0;bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom,var(--tp-badge-color),transparent 80%);
+  opacity:0;
+  transition:opacity .5s;
+}
+.tp-card:hover .tp-body::before{opacity:1}
+
+.tp-body-top{display:flex;flex-direction:column;gap:0}
+.tp-category-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.5rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tp-badge-color);
+  margin-bottom:.7rem;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  opacity:.8;
+}
+.tp-category-tag::before{
+  content:'';
+  display:block;width:12px;height:1.5px;
+  background:var(--tp-badge-color);
+  border-radius:2px;
+}
+.tp-title{
+  font-family:'Cabinet Grotesk','Space Grotesk',sans-serif;
+  font-size:.92rem;
+  font-weight:800;
+  line-height:1.15;letter-spacing:-.03em;
+  color:rgba(255,255,255,.95);
+  margin-bottom:.5rem;
+  transition:color .35s;
+}
+.tp-card:hover .tp-title{
+  color:var(--tp-badge-color);
+  text-shadow:0 0 30px color-mix(in srgb,var(--tp-badge-color) 40%,transparent);
+}
+.tp-abstract{
+  font-size:.65rem;font-weight:300;
+  color:rgba(255,255,255,.28);
+  line-height:1.65;flex:1;
+  display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+/* key finding */
+.tp-key-finding{
+  display:flex;align-items:flex-start;gap:.55rem;
+  background:color-mix(in srgb,var(--tp-badge-color) 5%,rgba(255,255,255,.02));
+  border:1px solid color-mix(in srgb,var(--tp-badge-color) 18%,transparent);
+  border-radius:10px;
+  padding:.6rem .85rem;
+  margin-top:.85rem;
+}
+.tp-kf-label{
+  font-size:.44rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--tp-badge-color);white-space:nowrap;margin-top:.1rem;
+  font-family:'Chivo Mono','Space Mono',monospace;
+}
+.tp-kf-text{
+  font-size:.68rem;color:rgba(255,255,255,.5);line-height:1.55;font-weight:400;
+}
+/* footer */
+.tp-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:.85rem;margin-top:.85rem;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.tp-footer-left{display:flex;flex-direction:column;gap:.08rem}
+.tp-footer-title{font-size:.68rem;color:rgba(255,255,255,.6);font-weight:600;letter-spacing:-.01em}
+.tp-footer-sub{font-size:.55rem;color:rgba(255,255,255,.22);font-weight:300;letter-spacing:.03em}
+.tp-cta{display:flex;align-items:center;gap:.5rem}
+.tp-read-time{font-size:.55rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
+.tp-arrow{
+  width:26px;height:26px;border-radius:50%;
+  background:color-mix(in srgb,var(--tp-badge-color) 20%,rgba(255,255,255,.08));
+  color:var(--tp-badge-color);
+  border:1px solid color-mix(in srgb,var(--tp-badge-color) 40%,transparent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;
+  transition:background .35s,transform .45s cubic-bezier(.22,1,.36,1),box-shadow .35s,color .3s;
+}
+.tp-card:hover .tp-arrow{
+  background:var(--tp-badge-color);
+  color:#050505;
+  transform:rotate(45deg);
+  box-shadow:0 0 20px color-mix(in srgb,var(--tp-badge-color) 60%,transparent);
+}
+
+/* Progress bar */
+.tp-prog-wrap{
+  display:flex;align-items:center;gap:.55rem;
+  margin-bottom:.7rem;
+}
+.tp-prog-track{
+  flex:1;height:3px;border-radius:100px;
+  background:rgba(255,255,255,.07);
+  overflow:hidden;
+}
+.tp-prog-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--tp-badge-color),color-mix(in srgb,var(--tp-badge-color) 60%,#fff));
+  border-radius:100px;
+  transition:width .6s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 0 8px var(--tp-badge-color);
+}
+.tp-prog-label{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.5rem;font-weight:600;letter-spacing:.06em;
+  color:var(--tp-badge-color);
+  white-space:nowrap;opacity:.8;
+}
+/* 100% complete card */
+.tp-card.tp-complete{
+  border-color:color-mix(in srgb,var(--tp-badge-color) 55%,transparent);
+}
+.tp-card.tp-complete .tp-visual::after{
+  content:'';
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--tp-badge-color) 10%,transparent) 0%,transparent 55%);
+  animation:completePulse 2.8s ease-in-out infinite;
+}
+@keyframes completePulse{0%,100%{opacity:.6}50%{opacity:1}}
+.tp-card.tp-complete .tp-ghost-num{
+  -webkit-text-stroke-color:color-mix(in srgb,var(--tp-badge-color) 60%,transparent);
+}
+
+/* hide old unused */
+.tp-fade,.tp-rule,.tp-meta-row,.tp-snippet,.tp-meta{display:none}
+
+/* ══ BODY SUBTOPIC CHIP CLOUD (compact) ══ */
+.tp-subs-cloud{
+  display:flex;flex-wrap:wrap;gap:4px;
+  margin-top:.5rem;margin-bottom:.6rem;
+}
+.tp-chip{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:2px 8px 2px 5px;
+  border-radius:100px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.025);
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.42rem;font-weight:500;letter-spacing:.03em;
+  color:rgba(255,255,255,.35);
+  white-space:nowrap;
+  transition:border-color .2s,color .2s,background .2s;
+}
+.tp-chip.tc-done{
+  border-color:color-mix(in srgb,var(--tp-badge-color) 45%,transparent);
+  background:color-mix(in srgb,var(--tp-badge-color) 9%,transparent);
+  color:var(--tp-badge-color);
+}
+.tp-chip-dot{
+  width:3px;height:3px;border-radius:50%;flex-shrink:0;
+  background:currentColor;opacity:.5;
+}
+.tp-chip.tc-done .tp-chip-dot{opacity:1;box-shadow:0 0 4px currentColor}
+.tp-chip-more{
+  display:inline-flex;align-items:center;
+  padding:2px 8px;
+  border-radius:100px;
+  border:1px dashed rgba(255,255,255,.08);
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.4rem;font-weight:600;letter-spacing:.06em;
+  color:rgba(255,255,255,.18);
+}
+
+/* ANIMATIONS */
+@keyframes nodePop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tp-card{animation:fadeUp .65s cubic-bezier(.25,.46,.45,.94) both}
+.tp-card:nth-child(1){animation-delay:.04s}.tp-card:nth-child(2){animation-delay:.1s}.tp-card:nth-child(3){animation-delay:.16s}.tp-card:nth-child(4){animation-delay:.22s}
+.tp-card:nth-child(5){animation-delay:.28s}.tp-card:nth-child(6){animation-delay:.34s}.tp-card:nth-child(7){animation-delay:.4s}.tp-card:nth-child(8){animation-delay:.46s}
+.tp-card:nth-child(9){animation-delay:.52s}.tp-card:nth-child(10){animation-delay:.58s}.tp-card:nth-child(11){animation-delay:.64s}.tp-card:nth-child(12){animation-delay:.7s}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.ch-card{animation:fadeUp .6s both}
+.ch-card:nth-child(1){animation-delay:.05s}
+.ch-card:nth-child(2){animation-delay:.12s}
+.ch-card:nth-child(3){animation-delay:.19s}
+.ch-card:nth-child(4){animation-delay:.26s}
+
+/* ══════════════════════════════ TOPIC DETAIL VIEW ══════════════════════════════ */
+#topicmap{
+  display:none;position:fixed;inset:0;z-index:300;
+  flex-direction:column;
+  background:#060606;
+  overflow:hidden;
+}
+#topicmap.active{display:flex}
+
+/* page slide-in animation */
+@keyframes tmSlideIn{
+  from{opacity:0;transform:translateY(32px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+#topicmap.active{animation:tmSlideIn .5s cubic-bezier(.22,1,.36,1) forwards}
+
+/* ── HERO HEADER ── */
+.tm-hero{
+  position:relative;
+  padding:32px 48px 28px;
+  flex-shrink:0;
+  overflow:hidden;
+  background:linear-gradient(
+    160deg,
+    color-mix(in srgb,var(--tm-color,#c8ff00) 12%,#050a05) 0%,
+    #070707 55%,
+    color-mix(in srgb,var(--tm-color,#c8ff00) 5%,#050505) 100%
+  );
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+/* animated orbs */
+.tm-hero-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation:tmOrbFloat ease-in-out infinite;
+}
+.tm-orb-a{
+  width:500px;height:500px;top:-200px;right:-100px;
+  background:radial-gradient(circle,color-mix(in srgb,var(--tm-color,#c8ff00) 22%,transparent),transparent 70%);
+  filter:blur(80px);animation-duration:16s;
+}
+.tm-orb-b{
+  width:300px;height:300px;bottom:-120px;left:-60px;
+  background:radial-gradient(circle,color-mix(in srgb,var(--tm-color,#c8ff00) 14%,transparent),transparent 70%);
+  filter:blur(60px);animation-duration:22s;animation-delay:-8s;
+}
+@keyframes tmOrbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,18px)}}
+/* noise texture */
+.tm-hero-noise{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:22px 22px;
+  mask-image:linear-gradient(to bottom right,rgba(0,0,0,.4),transparent 65%);
+}
+
+.tm-hero-inner{position:relative;z-index:2}
+
+/* top bar */
+.tm-hero-top{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;
+}
+.tm-back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.6);
+  padding:7px 14px 7px 10px;
+  border-radius:100px;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.tm-back-btn svg{width:14px;height:14px}
+.tm-back-btn:hover{
+  background:rgba(255,255,255,.1);
+  color:var(--tm-color,#c8ff00);
+  border-color:color-mix(in srgb,var(--tm-color,#c8ff00) 40%,transparent);
+}
+.tm-breadcrumb{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+}
+
+/* tag + title */
+.tm-hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--tm-color,#c8ff00);
+  margin-bottom:10px;
+}
+.tm-hero-tag::before{
+  content:'';display:block;width:6px;height:6px;border-radius:50%;
+  background:var(--tm-color,#c8ff00);
+  box-shadow:0 0 8px var(--tm-color,#c8ff00);
+  animation:pulse 2s ease-in-out infinite;
+}
+.tm-hero-title{
+  font-family:'Clash Display','Space Grotesk',sans-serif;
+  font-size:clamp(28px,5vw,58px);
+  font-weight:700;line-height:.9;letter-spacing:-2px;
+  color:var(--text);
+  margin-bottom:22px;
+  animation:tmTitleIn .6s cubic-bezier(.22,1,.36,1) .1s both;
+}
+@keyframes tmTitleIn{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* stats row */
+.tm-hero-stats{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:20px;
+  flex-wrap:wrap;gap:0;
+}
+.tm-stat{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 22px;
+}
+.tm-stat:first-child{padding-left:0}
+.tm-stat-n{
+  font-family:'Clash Display','Space Grotesk',sans-serif;
+  font-size:clamp(20px,3vw,32px);
+  font-weight:700;line-height:1;
+  color:var(--text);
+}
+.tm-stat-l{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);margin-top:3px;
+}
+.tm-stat-div{width:1px;height:28px;background:rgba(255,255,255,.1)}
+
+/* progress bar in hero */
+.tm-hero-prog{
+  display:flex;align-items:center;gap:14px;
+  max-width:460px;
+}
+.tm-prog-track{
+  flex:1;height:4px;border-radius:100px;
+  background:rgba(255,255,255,.08);overflow:hidden;
+}
+.tm-prog-fill{
+  height:100%;border-radius:100px;
+  background:linear-gradient(90deg,var(--tm-color,#c8ff00),color-mix(in srgb,var(--tm-color,#c8ff00) 60%,#fff));
+  transition:width .7s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 0 10px var(--tm-color,#c8ff00);
+}
+.tm-prog-pct{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.55rem;font-weight:700;letter-spacing:.06em;
+  color:var(--tm-color,#c8ff00);white-space:nowrap;
+}
+
+/* ── BENTO STAGE ── */
+.bento-stage{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:28px 48px 60px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.08) transparent;
+}
+@media(max-width:700px){.bento-stage{padding:20px 20px 48px}}
+
+/* ── BENTO GRID ── */
+.bento-grid{
+  columns:5;
+  column-gap:8px;
+  width:100%;
+}
+@media(max-width:1200px){.bento-grid{columns:4}}
+@media(max-width:860px) {.bento-grid{columns:3}}
+@media(max-width:560px) {.bento-grid{columns:2}}
+@media(max-width:360px) {.bento-grid{columns:1}}
+
+/* ══════════════ BENTO CARD — WORLD'S SEXIEST ══════════════ */
+.bn-card{
+  break-inside:avoid;
+  margin-bottom:8px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#0c0c0c;
+  padding:13px 13px 11px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:1/1;
+  display:flex;flex-direction:column;justify-content:space-between;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .4s;
+  animation:bnPop .55s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:calc(var(--i,0) * 45ms);
+  isolation:isolate;
+}
+@keyframes bnPop{
+  0%  {opacity:0;transform:scale(.84) translateY(20px)}
+  100%{opacity:1;transform:scale(1)   translateY(0)}
+}
+
+/* ── Layer 1: color orb — top-right bloom ── */
+.bn-card::before{
+  content:'';
+  position:absolute;top:-30%;right:-20%;
+  width:80%;padding-top:80%;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    color-mix(in srgb,var(--bn-color) 40%,transparent) 0%,
+    color-mix(in srgb,var(--bn-color) 10%,transparent) 45%,
+    transparent 70%
+  );
+  pointer-events:none;z-index:0;
+  transition:opacity .4s,transform .5s cubic-bezier(.22,1,.36,1);
+  opacity:.7;
+}
+.bn-card:hover::before{opacity:1;transform:scale(1.15)}
+.bn-card.bn-done::before{opacity:1}
+
+/* ── Layer 2: diagonal ruled lines ── */
+.bn-card::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:repeating-linear-gradient(
+    -45deg,
+    rgba(255,255,255,.025) 0px,
+    rgba(255,255,255,.025) 1px,
+    transparent 1px,
+    transparent 18px
+  );
+  pointer-events:none;z-index:0;
+  transition:opacity .3s;
+  opacity:1;
+}
+.bn-card:hover::after{opacity:.6}
+
+.bn-card:hover{
+  transform:translateY(-4px) scale(1.022);
+  border-color:color-mix(in srgb,var(--bn-color) 45%,transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--bn-color) 22%,transparent),
+    0 16px 50px -8px rgba(0,0,0,.85),
+    0 0 70px -14px color-mix(in srgb,var(--bn-color) 50%,transparent);
+}
+.bn-card.bn-done{
+  border-color:color-mix(in srgb,var(--bn-color) 45%,transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--bn-color) 22%,transparent),
+    inset 0 0 0 1px color-mix(in srgb,var(--bn-color) 8%,transparent);
+}
+
+/* ── Top row: pill + vol ── */
+.bn-top{
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:2;
+}
+.bn-pill{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px 3px 6px;
+  border-radius:100px;
+  background:color-mix(in srgb,var(--bn-color) 15%,rgba(0,0,0,.4));
+  border:1px solid color-mix(in srgb,var(--bn-color) 30%,transparent);
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.38rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bn-color);
+  backdrop-filter:blur(4px);
+  transition:background .3s,border-color .3s;
+}
+.bn-pill-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--bn-color);
+  box-shadow:0 0 6px var(--bn-color);
+  flex-shrink:0;
+  animation:pulse 2s ease-in-out infinite;
+}
+.bn-card.bn-done .bn-pill-dot{animation:none}
+.bn-vol{
+  font-family:'Clash Display','Space Grotesk',sans-serif;
+  font-size:.75rem;font-weight:700;letter-spacing:-.02em;
+  color:rgba(255,255,255,.18);
+}
+
+/* ── Center fill: giant number ── */
+.bn-center{
+  position:absolute;
+  inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;z-index:1;
+}
+.bn-giant{
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;
+  font-weight:700;
+  font-size:clamp(3.2rem,8vw,5rem);
+  line-height:1;
+  letter-spacing:-.04em;
+  color:transparent;
+  -webkit-text-stroke:1.5px color-mix(in srgb,var(--bn-color) 22%,rgba(255,255,255,.08));
+  user-select:none;
+  text-shadow:none;
+  transition:
+    -webkit-text-stroke-color .5s,
+    color .5s,
+    text-shadow .5s cubic-bezier(.22,1,.36,1),
+    transform .6s cubic-bezier(.22,1,.36,1),
+    opacity .4s;
+  opacity:.5;
+}
+.bn-card:hover .bn-giant{
+  -webkit-text-stroke-color:color-mix(in srgb,var(--bn-color) 65%,rgba(255,255,255,.12));
+  transform:scale(1.05) rotate(-1deg);
+  opacity:.85;
+}
+/* DONE: stroke fills with glowing color */
+.bn-card.bn-done .bn-giant{
+  color:color-mix(in srgb,var(--bn-color) 55%,transparent);
+  -webkit-text-stroke-color:var(--bn-color);
+  opacity:1;
+  text-shadow:
+    0 0 20px color-mix(in srgb,var(--bn-color) 70%,transparent),
+    0 0 50px color-mix(in srgb,var(--bn-color) 40%,transparent),
+    0 0 100px color-mix(in srgb,var(--bn-color) 20%,transparent);
+  animation:bnGiantGlow 2.8s ease-in-out infinite;
+}
+@keyframes bnGiantGlow{
+  0%,100%{
+    text-shadow:
+      0 0 18px color-mix(in srgb,var(--bn-color) 70%,transparent),
+      0 0 45px color-mix(in srgb,var(--bn-color) 38%,transparent),
+      0 0 90px color-mix(in srgb,var(--bn-color) 18%,transparent);
+  }
+  50%{
+    text-shadow:
+      0 0 28px color-mix(in srgb,var(--bn-color) 90%,transparent),
+      0 0 70px color-mix(in srgb,var(--bn-color) 55%,transparent),
+      0 0 130px color-mix(in srgb,var(--bn-color) 28%,transparent);
+  }
+}
+
+/* ── Accent bar across the middle ── */
+.bn-midline{
+  position:absolute;
+  top:50%;left:13px;right:13px;
+  height:1px;
+  background:linear-gradient(90deg,
+    transparent,
+    color-mix(in srgb,var(--bn-color) 30%,transparent) 30%,
+    color-mix(in srgb,var(--bn-color) 50%,transparent) 50%,
+    color-mix(in srgb,var(--bn-color) 30%,transparent) 70%,
+    transparent
+  );
+  pointer-events:none;z-index:2;
+  opacity:0;
+  transition:opacity .4s;
+}
+.bn-card:hover .bn-midline,.bn-card.bn-done .bn-midline{opacity:1}
+
+/* ── Bottom color strip ── */
+.bn-colorstrip{
+  position:absolute;bottom:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--bn-color) 0%,transparent),
+    var(--bn-color) 50%,
+    color-mix(in srgb,var(--bn-color) 0%,transparent)
+  );
+  opacity:0;
+  transition:opacity .4s;
+  z-index:3;
+}
+.bn-card:hover .bn-colorstrip{opacity:.6}
+.bn-card.bn-done .bn-colorstrip{opacity:1}
+
+/* ── Ghost number (bottom-right watermark) ── */
+.bn-ghost{
+  position:absolute;bottom:-8px;right:8px;
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;font-weight:700;
+  font-size:3.8rem;line-height:1;letter-spacing:-.06em;
+  color:transparent;
+  -webkit-text-stroke:1px color-mix(in srgb,var(--bn-color) 10%,rgba(255,255,255,.04));
+  pointer-events:none;user-select:none;z-index:1;
+  transition:-webkit-text-stroke-color .4s,transform .6s cubic-bezier(.22,1,.36,1);
+}
+.bn-card:hover .bn-ghost{
+  -webkit-text-stroke-color:color-mix(in srgb,var(--bn-color) 28%,rgba(255,255,255,.06));
+  transform:scale(1.06) translateY(-4px);
+}
+.bn-card.bn-done .bn-ghost{
+  -webkit-text-stroke-color:color-mix(in srgb,var(--bn-color) 22%,transparent);
+}
+
+/* ── Bottom block ── */
+.bn-bottom{
+  position:relative;z-index:2;
+}
+.bn-eyebrow{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.36rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);
+  margin-bottom:4px;
+}
+/* the main title — big serif italic like the reference */
+.bn-label{
+  font-family:'Bodoni Moda','Instrument Serif',serif;
+  font-style:italic;font-weight:500;
+  font-size:clamp(.78rem,1.4vw,.96rem);
+  line-height:1.2;letter-spacing:-.01em;
+  color:rgba(255,255,255,.92);
+  position:relative;z-index:1;
+  transition:color .3s;
+  margin-bottom:8px;
+}
+.bn-card:hover:not(.bn-done) .bn-label{color:#fff}
+.bn-card.bn-done .bn-label{
+  color:rgba(255,255,255,.28);
+  text-decoration:line-through;
+  text-decoration-color:color-mix(in srgb,var(--bn-color) 40%,transparent);
+  text-decoration-thickness:1.5px;
+}
+/* quote strip at very bottom like reference */
+.bn-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:6px;
+  padding-top:7px;
+  border-top:1px solid rgba(255,255,255,.07);
+  position:relative;z-index:2;
+  transition:border-color .3s;
+}
+.bn-card:hover .bn-footer,
+.bn-card.bn-done .bn-footer{
+  border-top-color:color-mix(in srgb,var(--bn-color) 22%,transparent);
+}
+.bn-idx{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.4rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bn-color);opacity:.5;
+  transition:opacity .3s;
+}
+.bn-card:hover .bn-idx,.bn-card.bn-done .bn-idx{opacity:1}
+
+/* ── Tick circle — lives in footer ── */
+.bn-tick{
+  width:18px;height:18px;border-radius:50%;flex-shrink:0;
+  border:1.5px solid rgba(255,255,255,.14);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+  transition:background .35s,border-color .35s,box-shadow .4s,transform .3s;
+  background:rgba(255,255,255,.03);
+}
+.bn-tick::before{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1px solid var(--bn-color);
+  opacity:0;transform:scale(.7);
+  transition:opacity .4s,transform .4s;
+}
+.bn-card.bn-done .bn-tick::before{
+  opacity:.3;transform:scale(1);
+  animation:tickRingPulse 2.8s ease-in-out infinite;
+}
+@keyframes tickRingPulse{
+  0%,100%{opacity:.3;transform:scale(1)}
+  50%{opacity:.06;transform:scale(1.18)}
+}
+.bn-tick svg{width:8px;height:8px;overflow:visible}
+.bn-tick svg polyline{
+  fill:none;stroke:#060606;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:18;stroke-dashoffset:18;
+  transition:stroke-dashoffset .45s cubic-bezier(.22,1,.36,1) .05s;
+}
+.bn-card:hover .bn-tick{
+  border-color:color-mix(in srgb,var(--bn-color) 55%,transparent);
+  background:color-mix(in srgb,var(--bn-color) 8%,transparent);
+  transform:scale(1.1);
+}
+.bn-card.bn-done .bn-tick{
+  background:var(--bn-color);
+  border-color:var(--bn-color);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--bn-color) 16%,transparent),
+             0 0 18px color-mix(in srgb,var(--bn-color) 60%,transparent);
+}
+.bn-card.bn-done .bn-tick svg polyline{stroke-dashoffset:0}
+
+/* action label */
+.bn-action{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:.4rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.14);
+  transition:color .3s;
+  flex:1;text-align:right;
+}
+.bn-card:hover .bn-action{color:var(--bn-color)}
+.bn-card.bn-done .bn-action{color:color-mix(in srgb,var(--bn-color) 55%,transparent)}
+
+/* done-tag layer kept for all-done banner only */
+#doneTagLayer{position:absolute;inset:0;pointer-events:none;z-index:50}
+#stageFlash{position:absolute;inset:0;pointer-events:none;z-index:5;opacity:0}
+
+/* ══ CARD RIPPLE + STAMP ANIMATION ══ */
+
+/* Ripple ring — spawned at click coords */
+.bn-ripple{
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:25;
+  transform:translate(-50%,-50%) scale(0);
+  border:2px solid var(--bn-color);
+  width:40px;height:40px;
+  opacity:0;
+  animation:bnRippleOut .65s cubic-bezier(.2,.8,.4,1) forwards;
+}
+@keyframes bnRippleOut{
+  0%  { transform:translate(-50%,-50%) scale(0);   opacity:.9; }
+  60% { opacity:.4; }
+  100%{ transform:translate(-50%,-50%) scale(5.5); opacity:0; }
+}
+/* second trailing ring */
+.bn-ripple.bn-ripple-2{
+  animation-delay:.12s;
+  border-width:1.5px;
+  opacity:0;
+}
+
+/* DONE stamp overlay — slides up from bottom */
+.bn-stamp{
+  position:absolute;inset:0;border-radius:inherit;
+  pointer-events:none;z-index:22;
+  display:flex;align-items:center;justify-content:center;
+  background:color-mix(in srgb,var(--bn-color) 18%,rgba(0,0,0,.35));
+  opacity:0;
+  clip-path:inset(100% 0 0 0);
+  animation:none;
+}
+.bn-stamp-label{
+  font-family:'Clash Display','Space Grotesk',sans-serif;
+  font-size:1.1rem;font-weight:700;letter-spacing:.08em;
+  color:var(--bn-color);
+  text-shadow:0 0 24px var(--bn-color),0 0 60px color-mix(in srgb,var(--bn-color) 50%,transparent);
+  opacity:0;
+  transform:translateY(6px) scale(.9);
+  animation:none;
+}
+.bn-card.bn-stamping .bn-stamp{
+  animation:bnStampIn .5s cubic-bezier(.22,1,.36,1) forwards;
+}
+.bn-card.bn-stamping .bn-stamp-label{
+  animation:bnStampLabel .45s cubic-bezier(.22,1,.36,1) .08s forwards;
+}
+.bn-card.bn-stamping{
+  animation:bnCardPop .45s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes bnStampIn{
+  0%  { opacity:0; clip-path:inset(100% 0 0 0); }
+  40% { opacity:1; clip-path:inset(0% 0 0 0);   }
+  70% { opacity:1; clip-path:inset(0% 0 0 0);   }
+  100%{ opacity:0; clip-path:inset(0% 0 0 0);   }
+}
+@keyframes bnStampLabel{
+  0%  { opacity:0; transform:translateY(6px) scale(.9); }
+  45% { opacity:1; transform:translateY(0)    scale(1);  }
+  70% { opacity:1; transform:translateY(0)    scale(1);  }
+  100%{ opacity:0; transform:translateY(-4px) scale(.95);}
+}
+@keyframes bnCardPop{
+  0%  { transform:scale(1);    }
+  30% { transform:scale(1.05); }
+  65% { transform:scale(.97);  }
+  100%{ transform:scale(1);    }
+}
+
+/* UNDO stamp */
+.bn-card.bn-unstamping .bn-stamp{
+  animation:bnUnstampIn .38s cubic-bezier(.22,1,.36,1) forwards;
+  background:rgba(255,255,255,.06);
+}
+.bn-card.bn-unstamping .bn-stamp-label{
+  animation:bnStampLabel .34s cubic-bezier(.22,1,.36,1) .04s forwards;
+  color:rgba(255,255,255,.4);
+}
+@keyframes bnUnstampIn{
+  0%  { opacity:0; clip-path:inset(0 0 100% 0); }
+  40% { opacity:1; clip-path:inset(0 0 0% 0);   }
+  70% { opacity:1; }
+  100%{ opacity:0; }
+}
+
+/* all-done stage pulse */
+@keyframes stageAllDone{
+  0%  { opacity:0; transform:scale(.85); }
+  18% { opacity:1; transform:scale(1);   }
+  100%{ opacity:0; transform:scale(1.15);}
+}
+.stage-all-done-flash{
+  position:absolute;inset:0;pointer-events:none;z-index:15;
+  background:radial-gradient(ellipse at 50% 50%,
+    color-mix(in srgb,var(--bn-color,#c8ff00) 40%,transparent) 0%,
+    transparent 68%
+  );
+  animation:stageAllDone 1.3s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* ══ DONE TAG — CINEMATIC ══ */
+.done-tag{
+  position:absolute;
+  pointer-events:none;
+  z-index:50;
+  transform:translate(-50%,-50%);
+  will-change:transform,opacity;
+}
+
+/* ── DONE pill ── */
+.dt-pill{
+  display:flex;align-items:center;gap:7px;
+  padding:6px 14px 6px 6px;
+  border-radius:100px;
+  background:var(--dt-color);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.15),
+    0 0 30px var(--dt-color),
+    0 0 70px var(--dt-color)55,
+    0 8px 32px rgba(0,0,0,.5);
+  white-space:nowrap;
+  overflow:hidden;
+  /* clip-path sweep reveal */
+  clip-path:inset(0 100% 0 0 round 100px);
+  animation:dtSweep .55s cubic-bezier(.22,1,.36,1) .05s forwards;
+  position:relative;
+}
+/* glow sweep line */
+.dt-pill::after{
+  content:'';
+  position:absolute;top:0;left:-60%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:dtGlowSweep .7s cubic-bezier(.4,0,.2,1) .3s forwards;
+  pointer-events:none;
+}
+@keyframes dtSweep{
+  0%  { clip-path:inset(0 100% 0 0 round 100px); }
+  100%{ clip-path:inset(0 0%   0 0 round 100px); }
+}
+@keyframes dtGlowSweep{
+  0%  { left:-60%; opacity:1; }
+  100%{ left:110%; opacity:0; }
+}
+
+/* checkmark circle */
+.dt-check{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:rgba(0,0,0,.28);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.dt-check svg{
+  width:12px;height:12px;
+  overflow:visible;
+}
+.dt-check svg polyline{
+  fill:none;
+  stroke:#050505;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:16;
+  stroke-dashoffset:16;
+  animation:dtCheckDraw .35s cubic-bezier(.22,1,.36,1) .45s forwards;
+}
+@keyframes dtCheckDraw{ to{ stroke-dashoffset:0; } }
+
+/* text */
+.dt-label{
+  font-family:'Cabinet Grotesk','Space Grotesk',sans-serif;
+  font-size:12px;font-weight:900;letter-spacing:.1em;
+  color:#050505;
+  text-transform:uppercase;
+  opacity:0;
+  transform:translateY(4px);
+  animation:dtLabelUp .3s cubic-bezier(.22,1,.36,1) .3s forwards;
+}
+@keyframes dtLabelUp{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* float up & out */
+.dt-pill.dt-exit{
+  animation:dtFloat .6s cubic-bezier(.4,0,.8,1) forwards !important;
+}
+@keyframes dtFloat{
+  0%  { opacity:1; transform:translateY(0)   scale(1);    filter:blur(0);    }
+  60% { opacity:.6; transform:translateY(-28px) scale(1.04); filter:blur(0);    }
+  100%{ opacity:0; transform:translateY(-55px) scale(.88);  filter:blur(3px);  }
+}
+
+/* wrapper lift */
+.done-tag.dt-lift{
+  animation:dtWrapLift .55s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes dtWrapLift{
+  0%  { transform:translate(-50%,-50%) scale(.7); }
+  55% { transform:translate(-50%,-125%) scale(1.06); }
+  75% { transform:translate(-50%,-118%) scale(.97); }
+  100%{ transform:translate(-50%,-122%) scale(1); }
+}
+.done-tag.dt-lift.dt-exit-wrap{
+  animation:dtWrapOut .5s cubic-bezier(.4,0,.8,1) forwards;
+}
+@keyframes dtWrapOut{
+  0%  { transform:translate(-50%,-122%) scale(1);   opacity:1; }
+  100%{ transform:translate(-50%,-200%) scale(.8); opacity:0; }
+}
+
+/* ── UNDO tag ── */
+.dt-undo{
+  font-family:'Chivo Mono','Space Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:.14em;
+  color:var(--dt-color);
+  background:rgba(8,8,8,.9);
+  border:1px solid var(--dt-color);
+  padding:5px 12px;
+  border-radius:100px;
+  box-shadow:0 0 14px var(--dt-color)44;
+  text-transform:uppercase;
+  opacity:0;
+  animation:dtUndo .65s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes dtUndo{
+  0%  { opacity:0; transform:translate(-50%,-50%) scale(.6); filter:blur(6px); }
+  40% { opacity:.9; transform:translate(-50%,-115%) scale(1.04); filter:blur(0); }
+  100%{ opacity:0; transform:translate(-50%,-160%) scale(.85); filter:blur(2px); }
+}
+
+/* ── ALL DONE overlay tag ── */
+.dt-all-done{
+  position:absolute;
+  pointer-events:none;
+  z-index:60;
+  transform:translate(-50%,-50%);
+  animation:dtAllDoneIn .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+.dt-all-pill{
+  display:flex;align-items:center;gap:9px;
+  padding:10px 22px 10px 10px;
+  border-radius:100px;
+  font-family:'Cabinet Grotesk','Space Grotesk',sans-serif;
+  font-size:16px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+  color:#050505;
+  background:var(--dt-color);
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.2),
+    0 0 50px var(--dt-color),
+    0 0 120px var(--dt-color)77,
+    0 16px 60px rgba(0,0,0,.6);
+  overflow:hidden;position:relative;
+  clip-path:inset(0 100% 0 0 round 100px);
+  animation:dtSweep .65s cubic-bezier(.22,1,.36,1) .08s forwards;
+}
+.dt-all-pill::after{
+  content:'';
+  position:absolute;top:0;left:-80%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:dtGlowSweep .8s cubic-bezier(.4,0,.2,1) .4s forwards;
+}
+@keyframes dtAllDoneIn{
+  0%  { transform:translate(-50%,-50%) scale(.5); opacity:0; }
+  55% { transform:translate(-50%,-140%) scale(1.1); opacity:1; }
+  75% { transform:translate(-50%,-130%) scale(.96); }
+  100%{ transform:translate(-50%,-135%) scale(1); opacity:1; }
+}
+.dt-all-done.dt-all-exit{
+  animation:dtAllDoneOut .7s cubic-bezier(.4,0,.8,1) forwards;
+}
+@keyframes dtAllDoneOut{
+  0%  { transform:translate(-50%,-135%) scale(1); opacity:1; filter:blur(0); }
+  100%{ transform:translate(-50%,-230%) scale(.7); opacity:0; filter:blur(8px); }
+}
+
+/* stage flash */
+#stageFlash{
+  position:absolute;inset:0;pointer-events:none;z-index:5;
+  background:radial-gradient(circle at var(--fx,50%) var(--fy,50%), rgba(255,255,255,.28) 0%, transparent 60%);
+  opacity:0;
+}
+#stageFlash.flash-go{
+  animation:stageFlashAnim .5s cubic-bezier(.4,0,.6,1) forwards;
+}
+@keyframes stageFlashAnim{
+  0%  { opacity:1; }
+  100%{ opacity:0; }
+}
+.tm-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  font-family:'Chivo Mono','Space Mono',monospace;font-size:.5rem;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(255,255,255,.18);pointer-events:none;
+  animation:fadeHint 4s ease-in-out 2s forwards;opacity:1}
+@keyframes fadeHint{0%{opacity:1}100%{opacity:0}}
+
+/* Mobile tweaks */
+@media(max-width:600px){.topics-body{padding:24px 20px 40px}.nm-header{padding:16px 20px}}
+@media(max-width:600px){.bento-stage{padding:12px 12px 40px}.bento-progress{padding:0 12px 10px}}
+</style>
+</head>
+<body>
+
+<!-- ══ HOME ══ -->
+<div id="home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <!-- atmospheric layers -->
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-stripe"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-scan"></div>
+
+    <!-- LEFT: title + stats -->
+    <div class="hero-left">
+      <div class="hero-vbar"></div>
+      <div class="hero-eyebrow">
+        <span class="eyebrow-tag"><span class="eyebrow-blink"></span>Live Atlas</span>
+        Class 11 · Biology · NCERT
+      </div>
+      <h1>
+        <span class="word-bio">BIO</span>
+        <span class="word-unit">UNIT</span>
+        <em data-text="ONE">ONE</em>
+      </h1>
+      <div class="hero-sub">
+        <div class="hero-stat"><div class="num">60</div><div class="lbl">Total Hours</div></div>
+        <div class="hero-stat"><div class="num">4</div><div class="lbl">Chapters</div></div>
+        <div class="hero-stat"><div class="num">20</div><div class="lbl">Days Plan</div></div>
+        <div class="hero-stat"><div class="num">3</div><div class="lbl">Hrs / Day</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: decorative -->
+    <div class="hero-right">
+      <div class="hero-bigword">BIOLOGY</div>
+      <div class="hero-index">
+        <div class="hero-index-item" onclick="openMap(0)"><span class="hero-index-dot" style="background:var(--c1)"></span>The Living World</div>
+        <div class="hero-index-item" onclick="openMap(1)"><span class="hero-index-dot" style="background:var(--c2)"></span>Biological Classification</div>
+        <div class="hero-index-item" onclick="openMap(2)"><span class="hero-index-dot" style="background:var(--c3)"></span>Plant Kingdom</div>
+        <div class="hero-index-item" onclick="openMap(3)"><span class="hero-index-dot" style="background:var(--c4)"></span>Animal Kingdom</div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: scroll hint -->
+    <div class="hero-scroll"><div class="hero-scroll-line"></div>Scroll to explore chapters</div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="hero-ticker">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>The Living World</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Biological Classification</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Plant Kingdom</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Animal Kingdom</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>60 Hours Total</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Class 11 NCERT Biology</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Taxonomy &amp; Nomenclature</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Five Kingdoms</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Algae to Angiosperms</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Phyla &amp; Classification</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ticker-dot"></span>The Living World</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Biological Classification</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Plant Kingdom</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Animal Kingdom</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>60 Hours Total</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Class 11 NCERT Biology</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Taxonomy &amp; Nomenclature</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Five Kingdoms</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Algae to Angiosperms</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Phyla &amp; Classification</span>
+    </div>
+  </div>
+
+  <!-- CHAPTERS -->
+  <div class="home-body">
+  <div class="prog-wrap">
+    <div class="prog-label">60-Hour Distribution</div>
+    <div class="prog-bar">
+      <div class="prog-seg" data-ch="1" title="Ch1 · 6hrs"></div>
+      <div class="prog-seg" data-ch="2" title="Ch2 · 12hrs"></div>
+      <div class="prog-seg" data-ch="3" title="Ch3 · 18hrs"></div>
+      <div class="prog-seg" data-ch="4" title="Ch4 · 20hrs"></div>
+      <div class="prog-seg" data-ch="r" title="Revision · 4hrs"></div>
+    </div>
+    <div class="prog-legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--c1)"></div>Living World · 6h</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--c2)"></div>Bio Classification · 12h</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--c3)"></div>Plant Kingdom · 18h</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--c4)"></div>Animal Kingdom · 20h</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(255,255,255,.15)"></div>Revision · 4h</div>
+    </div>
+  </div>
+  <div class="grid-label">↓ Click chapter to explore topics</div>
+  <div class="chapters-grid">
+    <div class="ch-card" data-ch="1" onclick="openMap(0)">
+      <div class="card-bg-num">01</div>
+      <div class="card-chip"><span class="chip-dot"></span>Chapter 01</div>
+      <div class="card-title">The Living World</div>
+      <div class="card-sub">Taxonomy · Nomenclature · Diversity</div>
+      <div class="card-time"><div class="hrs">6</div><div class="hrs-lbl">hours</div></div>
+      <div class="card-pills">
+        <div class="pill">What is Living?</div>
+        <div class="pill">Taxonomic Categories</div>
+        <div class="pill">Taxonomical Aids</div>
+        <div class="pill">Nomenclature</div>
+      </div>
+      <div class="card-open">View All Topics <span class="arrow">→</span></div>
+    </div>
+    <div class="ch-card" data-ch="2" onclick="openMap(1)">
+      <div class="card-bg-num">02</div>
+      <div class="card-chip"><span class="chip-dot"></span>Chapter 02</div>
+      <div class="card-title">Biological Classification</div>
+      <div class="card-sub">5 Kingdoms · Viruses · Lichens</div>
+      <div class="card-time"><div class="hrs">12</div><div class="hrs-lbl">hours</div></div>
+      <div class="card-pills">
+        <div class="pill">Monera</div><div class="pill">Protista</div><div class="pill">Fungi</div>
+        <div class="pill">Viruses</div><div class="pill">Lichens</div>
+      </div>
+      <div class="card-open">View All Topics <span class="arrow">→</span></div>
+    </div>
+    <div class="ch-card" data-ch="3" onclick="openMap(2)">
+      <div class="card-bg-num">03</div>
+      <div class="card-chip"><span class="chip-dot"></span>Chapter 03</div>
+      <div class="card-title">Plant Kingdom</div>
+      <div class="card-sub">Algae to Angiosperms · Life Cycles</div>
+      <div class="card-time"><div class="hrs">18</div><div class="hrs-lbl">hours</div></div>
+      <div class="card-pills">
+        <div class="pill">Algae</div><div class="pill">Bryophytes</div>
+        <div class="pill">Pteridophytes</div><div class="pill">Gymnosperms</div><div class="pill">Angiosperms</div>
+      </div>
+      <div class="card-open">View All Topics <span class="arrow">→</span></div>
+    </div>
+    <div class="ch-card" data-ch="4" onclick="openMap(3)">
+      <div class="card-bg-num">04</div>
+      <div class="card-chip"><span class="chip-dot"></span>Chapter 04</div>
+      <div class="card-title">Animal Kingdom</div>
+      <div class="card-sub">All Phyla · Chordates · Vertebrates</div>
+      <div class="card-time"><div class="hrs">20</div><div class="hrs-lbl">hours</div></div>
+      <div class="card-pills">
+        <div class="pill">Non-Chordates</div><div class="pill">Chordata</div>
+        <div class="pill">9 Phyla</div><div class="pill">Vertebrates</div>
+      </div>
+      <div class="card-open">View All Topics <span class="arrow">→</span></div>
+    </div>
+  </div>
+  </div><!-- /home-body -->
+
+  <!-- TIMETABLE -->
+  <div class="tt-section">
+    <div class="hero-eyebrow" style="margin-bottom:10px">3 hrs/day · 20 days plan</div>
+    <h2>60-Hour<br>Timetable</h2>
+    <div class="tt-desc">↓ Each block = 1 study day</div>
+    <div class="tt-grid" id="ttGrid"></div>
+  </div>
+
+  <footer>
+    <span>BIO UNIT 1 ATLAS — CLASS XI</span>
+    <span>NCERT · NEET READY · 60 HOURS</span>
+  </footer>
+</div>
+
+<!-- ══ CHAPTER TOPICS VIEW ══ -->
+<div id="nodemap">
+  <div class="nm-header">
+    <div class="nm-left">
+      <div class="nm-tag" id="nmTag">CH 01</div>
+      <div>
+        <div class="nm-title" id="nmTitle">THE LIVING WORLD</div>
+        <div class="nm-hrs" id="nmHrs">6 HOURS TOTAL</div>
+      </div>
+    </div>
+    <button class="nm-back" onclick="closeMap()">← Back to Home</button>
+  </div>
+  <div class="topics-body">
+    <div class="topics-hero">
+      <div class="topics-hero-eyebrow" id="nmEyebrow">Chapter 01 · Biology</div>
+      <div class="topics-hero-h" id="nmHeroTitle">THE<br>LIVING<br><em>WORLD</em></div>
+      <div class="topics-hero-meta">
+        <div class="topics-stat"><div class="n" id="nmStatHrs">6</div><div class="l">Total Hours</div></div>
+        <div class="topics-divider"></div>
+        <div class="topics-stat"><div class="n" id="nmStatTopics">9</div><div class="l">Topics</div></div>
+        <div class="topics-divider"></div>
+        <div class="topics-stat"><div class="n" id="nmStatSubs">60+</div><div class="l">Subtopics</div></div>
+      </div>
+    </div>
+    <div class="topics-grid-label">↓ Click topic to explore subtopics</div>
+    <div class="topics-grid" id="topicsGrid"></div>
+  </div>
+</div>
+
+<!-- ══ TOPIC SUBTOPIC DETAIL VIEW ══ -->
+<div id="topicmap">
+  <!-- HERO HEADER -->
+  <div class="tm-hero" id="tmHero">
+    <div class="tm-hero-orb tm-orb-a"></div>
+    <div class="tm-hero-orb tm-orb-b"></div>
+    <div class="tm-hero-noise"></div>
+    <div class="tm-hero-inner">
+      <div class="tm-hero-top">
+        <button class="tm-back-btn" onclick="closeTopicMap()">
+          <svg viewBox="0 0 16 16" fill="none"><polyline points="10,3 5,8 10,13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <div class="tm-breadcrumb" id="tmBreadcrumb">CHAPTER 01 · BIOLOGY</div>
+      </div>
+      <div class="tm-hero-tag" id="tmTag">TOPIC 01</div>
+      <h1 class="tm-hero-title" id="tmTitle">Characteristics of Living</h1>
+      <div class="tm-hero-stats">
+        <div class="tm-stat"><span class="tm-stat-n" id="tmStatHrs">1</span><span class="tm-stat-l">Hours</span></div>
+        <div class="tm-stat-div"></div>
+        <div class="tm-stat"><span class="tm-stat-n" id="tmStatSubs">0</span><span class="tm-stat-l">Subtopics</span></div>
+        <div class="tm-stat-div"></div>
+        <div class="tm-stat"><span class="tm-stat-n" id="tmStatDone">0</span><span class="tm-stat-l">Completed</span></div>
+      </div>
+      <div class="tm-hero-prog">
+        <div class="tm-prog-track"><div class="tm-prog-fill" id="bentoProgFill" style="width:0%"></div></div>
+        <span class="tm-prog-pct" id="bentoProgLabel">0 / 0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENTO GRID -->
+  <div class="bento-stage" id="bentoStage">
+    <div id="doneTagLayer"></div>
+    <div id="stageFlash"></div>
+    <div class="bento-grid" id="bentoGrid"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════ DATA ══════════════
+const CHAPTERS = [
+  {
+    id:1, title:"THE LIVING WORLD", short:"Living World", hours:6, color:"#c8ff00",
+    topics:[
+      {name:"Characteristics of Living",hours:1,subs:["Growth - Increase in Mass & Number","Intrinsic Growth from Inside","Extrinsic Growth in Non-living","Reproduction - Not Universal Criterion","Metabolism - Sum of All Reactions","Anabolism & Catabolism","Cellular Organization - Basic Unit","Response to Stimuli - Irritability","Consciousness - Awareness","Adaptation - Fitness to Environment","Homeostasis - Internal Balance","RBC & Mule - Non-reproducing Living","Growth & Reproduction Not Absolute"]},
+      {name:"Biodiversity & Need for Classification",hours:0.5,subs:["1.7-1.8 Million Species Identified","Estimated 5-50 Million Total Species","Need for Identification & Nomenclature","Need for Systematics","Diverse Habitats - Land, Water, Air","Microorganisms - Bacteria to Fungi","Macro Organisms - Plants & Animals","Conservation Need","Biodiversity Hotspots","Threat of Extinction"]},
+      {name:"Taxonomy & Systematics",hours:1,subs:["Taxonomy - Identification, Nomenclature, Classification","Systematics - Relationships + Diversity","A.P. de Candolle 1813 - Coined Taxonomy","Julian Huxley 1940 - New Systematics","Neo-systematics = Biosystematics","Three Steps: Identification → Nomenclature → Classification","Characterization of Organisms","Classification Based on Characters","Phylogenetic Relationships","Evolutionary History","Alpha Taxonomy - Classical","Cytotaxonomy - Based on Chromosome","Chemotaxonomy - Based on Chemicals"]},
+      {name:"Binomial Nomenclature",hours:0.75,subs:["Carolus Linnaeus 1753 - Species Plantarum","Two-part Name: Genus + Species","Mangifera indica - Mango","Homo sapiens - Humans","Solanum tuberosum - Potato","Panthera leo - Lion","Genus - First Word, Capitalized","Species - Second Word, Lowercase","Author Name After Species Name","Latin or Latinized Words","Italics in Print, Underlined in Writing","International Code Governs"]},
+      {name:"Nomenclature Rules & Codes",hours:0.75,subs:["ICBN - International Code for Botanical Nomenclature","ICZN - International Code of Zoological Nomenclature","ICVN - International Code of Viral Nomenclature","ICNB - Bacteriological Nomenclature","One Correct Name Per Organism","Universally Accepted","Name Must Be Latin or Latinized","Italics or Underline Mandatory","Type Specimen Concept","Holotype - Original Specimen","Isotype - Duplicate of Holotype","Synonym - Alternative Invalid Names"]},
+      {name:"Taxonomic Categories",hours:1.5,subs:["Species - Basic Unit of Classification","Genus - Group of Related Species","Family - Group of Related Genera","Order - Group of Similar Families","Class - General Broader Category","Phylum/Division - Next Level","Kingdom - Highest Rank","Obligate vs Intermediate Categories","Optional: Subfamily, Suborder","Felis domesticus → Felidae → Carnivora","Homo sapiens → Hominidae → Primates","Solanum → Solanaceae → Polemoniales","Taxon - Any Rank of Classification"]},
+      {name:"Taxonomic Hierarchy Examples",hours:0.75,subs:["Linnaean Hierarchy - 7 Levels","Kingdom → Phylum → Class → Order","Order → Family → Genus → Species","Mango: Plantae-Angiosperms-Dicot","Wheat: Poaceae-Triticum aestivum","Housefly: Animalia-Musca domestica","Dog: Canis lupus familiaris","Tiger: Panthera tigris","Reproductive Isolation Defines Species","John Ray - First Defined Species","Ernst Mayr 1964 - Biological Species Concept"]},
+      {name:"Taxonomical Aids",hours:1,subs:["Herbarium - Dried Preserved Plant Specimens","Herbarium Sheet - Standard Format","Kew Gardens - Largest Herbarium","Botanical Gardens - Living Collections","Royal Botanic Gardens - Kew, UK","Indian Botanical Garden - Howrah","Museum - Preserved Specimens in Jars","Zoological Parks - Living Animals","National Zoological Park - Delhi","Keys - Dichotomous Identification Tool","Monograph - One Taxon in Detail","Flora - Plants of an Area","Manual - Field Identification","Catalogue - List of Species","Taxonomy Journals & Publications"]}
+    ]
+  },
+  {
+    id:2, title:"BIOLOGICAL CLASSIFICATION", short:"Bio Classification", hours:12, color:"#ff6b35",
+    topics:[
+      {name:"History of Classification",hours:0.75,subs:["Aristotle - First Classifier","Aristotle - Plants: Trees, Shrubs, Herbs","Aristotle - Animals: Blood/No Blood","Two Kingdom System - Carolus Linnaeus","Kingdom Plantae & Kingdom Animalia","Limitation: Fungi not Autotrophic","Limitation: Euglena - Both Features","Bacteria Placement Problem","Ernst Haeckel 1866 - Kingdom Protista","Proposed 3rd Kingdom","Copeland 1956 - Kingdom Monera","4-Kingdom System","Herbert Whittaker 1969 - 5 Kingdoms"]},
+      {name:"Five Kingdom System",hours:1.25,subs:["R.H. Whittaker 1969","5 Kingdoms: Monera, Protista, Fungi, Plantae, Animalia","Criterion 1: Cell Structure (Pro/Eukaryote)","Criterion 2: Body Organization (Unicell/Multicell)","Criterion 3: Mode of Nutrition","Criterion 4: Reproduction Mode","Criterion 5: Phylogenetic Relationships","Monera - Prokaryotes","Protista - Unicellular Eukaryotes","Fungi - Saprophytic Eukaryotes","Plantae - Photosynthetic Multicell","Animalia - Heterotrophic Multicell","Advantages over 2-Kingdom System","Limitation: Virus not Included"]},
+      {name:"Kingdom Monera",hours:2.5,subs:["All Prokaryotes","No Membrane-bound Nucleus","No Membrane-bound Organelles","Cell Wall Present in Most","Motile & Non-motile Members","Archaebacteria - Ancient Bacteria","Halophiles - Salt-loving","Thermoacidophiles - Hot Springs","Methanogens - Methane Producers","Eubacteria - True Bacteria","Gram-positive: Thick Peptidoglycan","Gram-negative: Thin + Outer Membrane","Cyanobacteria - BGA, Photosynthetic","Nostoc, Anabaena - Nitrogen Fixers","Mycoplasma - PPLO, No Cell Wall","Smallest Living Cell","Chemosynthetic Bacteria - Energy from Chemicals","Actinomycetes - Filamentous, Ray Fungi","Binary Fission - Asexual","Conjugation, Transformation, Transduction"]},
+      {name:"Kingdom Protista",hours:2,subs:["Unicellular Eukaryotes","Link between Plants, Fungi & Animals","Chrysophytes - Diatoms & Golden Algae","Diatomaceous Earth - Cell Wall Silica","Chief Producers in Ocean","Dinoflagellates - Spinning Movement","Red Tides - Gonyaulax toxin","Bioluminescence in Marine","Euglenoids - Euglena","Pellicle - No Cell Wall","Mixotrophic - Autotrophic in Light","Slime Moulds - Saprophytic Decomposers","Plasmodium Stage - Multinucleate","Fruiting Bodies on Decaying Material","Protozoans - Animal-like","Amoeboid - Pseudopodia","Flagellated - Trypanosoma","Ciliated - Paramecium","Sporozoans - Plasmodium (Malaria)","Asexual: Binary Fission","Sexual: Syngamy & Three-step Meiosis"]},
+      {name:"Kingdom Fungi",hours:2.5,subs:["Heterotrophic Eukaryotes","Saprophytic - Dead Organic Matter","Parasitic - Living Host","Symbiotic - Mutualism","Chitin Cell Wall - Unique","Glycogen as Food Reserve","Mycelium - Network of Hyphae","Septate & Aseptate Hyphae","Phycomycetes - Lower Fungi","Rhizopus - Bread Mould","Mucor - Pin Mould","Ascomycetes - Sac Fungi","Penicillium - Antibiotic Source","Aspergillus - Aflatoxin","Claviceps - Ergot","Neurospora - Lab Organism","Saccharomyces - Yeast","Basidiomycetes - Club Fungi","Agaricus - Mushroom","Ustilago - Smut","Puccinia - Rust","Deuteromycetes - Fungi Imperfecti","Alternaria, Colletotrichum, Trichoderma","Mycorrhiza - Root-Fungus Mutualism","Economic Importance - Antibiotics, Food"]},
+      {name:"Kingdom Plantae",hours:0.5,subs:["Eukaryotic Multicellular","Cell Wall - Cellulose","Autotrophic Photosynthetic","Chlorophyll a & b","Chloroplasts Present","Vacuolate Cells","Starch as Food Reserve","Alternation of Generations","Insectivorous Plants - Heterotrophic Too","Parasitic Plants - Cuscuta","Symbiotic - Lichens","Embryo Formation","Dominant Photoautotrophs"]},
+      {name:"Kingdom Animalia",hours:0.5,subs:["Eukaryotic Multicellular","No Cell Wall","No Chloroplasts","Heterotrophic Holozoic","Glycogen as Reserve Food","Definite Shape & Size","High Motility","Complex Organ Systems","Nervous System Present","Muscular System Present","Sexual Reproduction Dominant","Embryonic Development","Most Diverse Kingdom"]},
+      {name:"Viruses - Structure & Discovery",hours:1.25,subs:["Non-cellular Entities","Obligate Intracellular Parasites","Dmitri Ivanowsky 1892 - TMV","M.W. Beijerinck 1898 - Contagium vivum fluidum","W.M. Stanley 1935 - Crystallized TMV","Nobel Prize - Stanley 1946","Protein Capsid - Outer Shell","Capsomeres - Protein Subunits","Genetic Material - DNA or RNA, Not Both","DNA Viruses: T4 Bacteriophage","RNA Viruses: TMV, HIV, Influenza","Naked vs Enveloped Viruses","Bacteriophages - Infect Bacteria","Lytic & Lysogenic Cycles","Retroviruses - HIV","RNA → DNA via Reverse Transcriptase","Virion - Complete Virus Particle","Plant, Animal & Bacterial Viruses"]},
+      {name:"Viroids & Prions",hours:0.75,subs:["Viroids - T.O. Diener 1971","Smaller than Viruses","Free Circular RNA - No Protein Coat","Potato Spindle Tuber Viroid","Infectious RNA Molecules","Cause Disease in Plants","Prions - Stanley Prusiner 1982","Proteinaceous Infectious Particles","Misfolded Proteins","No Nucleic Acid","Bovine Spongiform Encephalopathy (BSE)","Mad Cow Disease","Creutzfeldt-Jakob Disease (CJD)","Scrapie in Sheep","Fatal Neurodegenerative Diseases","Resistant to Normal Sterilization"]},
+      {name:"Lichens - Symbiosis",hours:1,subs:["Fungus + Alga Symbiotic Association","Mycobiont - Fungal Partner","Photobiont - Algal/Cyanobacterial Partner","Algae Provides Food via Photosynthesis","Fungus Provides Water & Minerals","Crustose - Crust on Rock","Foliose - Leaf-like Lobes","Fruticose - Bushy, Erect","Pioneer Species - Bare Rocks","Prepare Soil for Others","Bioindicators of Air Quality","Cannot Survive Air Pollution","Usnic Acid - Antibiotic from Lichen","Reindeer Moss - Cladonia","Iceland Moss - Food Source","Rock Tripe - Edible Lichen"]},
+      {name:"Kingdom Comparison Chart",hours:1,subs:["Monera: Prokaryote, Unicellular, No Nuclear Membrane","Protista: Eukaryote, Unicellular","Fungi: Eukaryote, Mostly Multicellular","Plantae: Eukaryote, Multicellular, Autotroph","Animalia: Eukaryote, Multicellular, Heterotroph","Cell Wall: Peptidoglycan/None/Chitin/Cellulose/None","Nutrition: Auto/Hetero/Sapro/Photo/Holozoic","Motility: Flagella/Flagella-Cilia/Non-motile","Reproduction: Fission/Fission-Conjugation/Spores","Phylogenetic Significance","Evolution from Monera → Others"]}
+    ]
+  },
+  {
+    id:3, title:"PLANT KINGDOM", short:"Plant Kingdom", hours:18, color:"#00d4ff",
+    topics:[
+      {name:"Algae - Chlorophyceae",hours:1,subs:["Green Algae","Chlorophyll a & b","Carotenes & Xanthophylls","Grass Green Color","Pyrenoids - Starch Synthesis","Cellulose Cell Wall","Stored Food - Starch","Chlamydomonas - Unicellular Flagellate","Volvox - Colonial, 500-50000 Cells","Ulothrix - Unbranched Filament","Spirogyra - Spiral Chloroplast","Conjugation Reproduction in Spirogyra","Cladophora - Branched Marine","Freshwater, Marine, Terrestrial","Zoospores - Flagellated Asexual Spores","Isogamous, Anisogamous, Oogamous"]},
+      {name:"Algae - Phaeophyceae",hours:1,subs:["Brown Algae","Chlorophyll a & c","Fucoxanthin - Brown Pigment","Mannitol & Laminarin as Food","Cellulose + Alginic Acid Wall","Fucus - Rockweed, Intertidal","Laminaria - Kelp, Largest Seaweed","Ectocarpus - Filamentous","Sargassum - Free-floating","Diplontic or Haplo-diplontic Life Cycle","Alternation of Generations","Unilocular & Plurilocular Sporangia","Anisogametes or Oogamy","Kelp Forests - Important Ecosystem","Alginates - Food Industry","Iodine Source from Kelp"]},
+      {name:"Algae - Rhodophyceae",hours:1,subs:["Red Algae","Chlorophyll a & d","Phycoerythrin - Red Pigment","Phycocyanin Also Present","Floridean Starch - Food Reserve","Cellulose + Pectin Cell Wall","Deepest Growing Algae - Use Blue-Green Light","Polysiphonia - Branched Filament","Porphyra - Nori, Food in Japan","Gracilaria - Agar Source","Gelidium - Agar Source","Corallina - Calcareous","No Flagellated Stages","Non-motile Gametes","Agar Used in Microbiology","Carrageenan - Food Stabilizer","Complex Life Cycle - 3 Phases"]},
+      {name:"Algae - Economic Importance",hours:0.5,subs:["50% of Total CO2 Fixation on Earth","Primary Producers in Aquatic","Agar - Microbiological Media","Carrageenan - Food Industry","Alginates - Thickeners","Chlorella - Single Cell Protein","Spirulina - Nutritional Supplement","Kelp - Iodine & Potassium Source","Porphyra - Food (Nori)","Fuel from Algae - Biofuel","Sewage Treatment","Soil Fertility - Cyanobacteria","Diatomite/Kieselguhr - Filtration","Nori in Sushi Rolls"]},
+      {name:"Bryophytes - General Features",hours:1,subs:["Amphibians of Plant Kingdom","Need Water for Fertilization","Thalloid or Leafy Body","No True Roots - Rhizoids Only","Rhizoids - Unicellular or Multicellular","No Vascular Tissue - No Xylem/Phloem","Dominant Gametophyte (n)","Sporophyte Partially Dependent on Gametophyte","Multicellular Sex Organs","Archegonium - Female, Flask-shaped","Antheridium - Male","Motile Biflagellate Antherozoids","Embryo Retained in Archegonium","Sporophyte: Foot, Seta, Capsule","Meiosis in Capsule → Spores","Economic Role: Peat Moss (Sphagnum)"]},
+      {name:"Bryophytes - Liverworts & Mosses",hours:0.75,subs:["Liverworts - Hepaticopsida","Marchantia - Thalloid Liverwort","Riccia - Simpler Thalloid","Pellia - Thalloid","Porella - Leafy Liverwort","Dorsiventral Thallus","Gemma Cups - Asexual Reproduction","Gemmae - Multicellular Asexual Bodies","Mosses - Musci","Funaria - Cord Moss","Polytrichum - Haircap Moss","Sphagnum - Peat Moss","Protonema Stage in Mosses","Upright Leafy Gametophyte","Sporophyte Foot, Seta, Capsule","Peristome Teeth Control Spore Release","Sphagnum Used as Packing Material","Soil Formation Role"]},
+      {name:"Pteridophytes - General",hours:1,subs:["First True Vascular Land Plants","Tracheophytes - Have Xylem & Phloem","Sporophyte Dominant (2n)","True Roots, Stem & Leaves","Microphylls - Small Leaves","Megaphylls - Large Leaves","Sporangia in Sori on Leaves","Homosporous - One Spore Type","Heterosporous - Two Spore Types","Microspore - Male Gametophyte","Megaspore - Female Gametophyte","Seed Habit - Origin from Heterospory","Prothallus - Free-living Gametophyte","Seedless Vascular Plants","Archegonia & Antheridia on Prothallus","Motile Antherozoids Still Required","Water Still Needed for Fertilization"]},
+      {name:"Pteridophytes - Classification & Examples",hours:1,subs:["Class Psilopsida - Whisk Ferns","Psilotum - Simplest Vascular Plant","Class Lycopsida - Club Mosses","Selaginella - Heterosporous","Lycopodium - Homosporous","Class Sphenopsida - Horsetails","Equisetum - Jointed Stem, Silica","Strobili - Cone-like Structures","Class Pteropsida - True Ferns","Dryopteris - Common Fern","Pteris - Bracken Fern","Adiantum - Maidenhair Fern","Azolla - Floating Fern","Marsilea - Water Fern","Salvinia - Heterosporous Fern","Fossil Record - Lepidodendron","Coal Formation from Carboniferous Ferns"]},
+      {name:"Gymnosperms - Features & Cycas",hours:1,subs:["Gymnos = Naked, Sperma = Seed","Naked Seeds - Not Enclosed in Fruit","No True Flowers","No Fruits","Heterosporous","Ovules on Megasporophylls","Pollen Grain = Microspore","Large Plant Body - Trees/Shrubs","Perennial Long-lived Plants","Cycas - Sago Palm","Pinnately Compound Leaves","Coralloid Roots - Cyanobacteria Nitrogen Fixation","Large Microsporophyll Cones","Mega Sporophylls - Loose, Not Cone","Motile Multi-flagellate Sperms","Archaic Gymnosperm - Living Fossil","Cycasin - Toxic Compound","Used Ornamentally"]},
+      {name:"Gymnosperms - Pinus & Gnetum",hours:0.75,subs:["Pinus - Pine Tree","Needle-like Leaves in Fascicles","Resin Ducts in Leaves & Stem","Male Cones - Small, Herbaceous","Female Cones - Large, Woody","Pollen Sacs → Pollen Grains","Winged Pollen - Wind Pollinated","Ovuliferous Scales with 2 Ovules","Seed has Wing - Wind Dispersal","Mature Cone Takes 2-3 Years","Turpentine & Rosin from Pinus","Pinus sylvestris - Scots Pine","Gnetum - Dicot-like Gymnosperm","Vessel Elements in Xylem - Advanced","Broad Net-veined Leaves","Gnetum, Ephedra, Welwitschia in Gnetales","Ephedrine Drug from Ephedra","Welwitschia - Only 2 Leaves Lifetime"]},
+      {name:"Angiosperms - Flowering Plants",hours:1.5,subs:["Most Evolved Vascular Plants","Seeds Enclosed in Fruits","True Flowers - Reproductive Organs","Double Fertilization - Unique to Angiosperms","Triple Fusion → Endosperm (3n)","Syngamy → Zygote (2n)","Endosperm - Nutritive Tissue for Embryo","Monocotyledons - One Cotyledon","Dicotyledons - Two Cotyledons","Monocot: Parallel Venation","Dicot: Reticulate Venation","Monocot: Fibrous Root, Trimerous Flower","Dicot: Taproot, Tetramerous/Pentamerous","130,000+ Species Known","Pollination: Wind, Water, Insects, Birds","Most Economically Important Group"]},
+      {name:"Plant Life Cycles & Alternation",hours:1.5,subs:["Haplontic Life Cycle - Gametophyte Dominant","Spirogyra - Haplontic","Diplontic Life Cycle - Sporophyte Dominant","Most Animals - Diplontic","Fucus - Diplontic Alga","Haplo-diplontic - Both Prominent","Bryophytes - Haplo-diplontic (Gametophyte Dominant)","Pteridophytes - Haplo-diplontic (Sporophyte Dominant)","Gymnosperms & Angiosperms - Diplontic","Sporophyte Generation (2n) - Makes Spores","Gametophyte Generation (n) - Makes Gametes","Meiosis: 2n → n Spores","Fertilization: n + n → 2n Zygote","Isomorphic Alternation - Similar Generations","Heteromorphic Alternation - Different Generations","Dominant Generation = More Prominent"]}
+    ]
+  },
+  {
+    id:4, title:"ANIMAL KINGDOM", short:"Animal Kingdom", hours:20, color:"#ff3d9a",
+    topics:[
+      {name:"Basis of Classification",hours:2,subs:["Levels of Organization: Cellular → Tissue → Organ → Organ System","Cellular Level - Porifera","Tissue Level - Coelenterata","Organ Level - Platyhelminthes","Organ System Level - Higher Animals","Symmetry: Asymmetry in Sponges","Radial Symmetry - Coelenterata, Ctenophora","Bilateral Symmetry - Most Animals","Diploblastic - 2 Germ Layers (Ecto + Endo)","Triploblastic - 3 Germ Layers (+ Meso)","Coelom - Body Cavity Lined by Mesoderm","Acoelomate - No Coelom (Platyhelminthes)","Pseudocoelomate - False Coelom (Aschelminthes)","Coelomate - True Coelom (Annelida onwards)","Protostomia vs Deuterostomia","Segmentation/Metamerism - Annelida & Arthropoda","Notochord - Chordata Defining Feature","Open vs Closed Circulation","Direct vs Indirect Development"]},
+      {name:"Phylum Porifera",hours:1,subs:["Pore-bearing Animals - Sponges","Cellular Level of Organization","Mostly Marine, Few Freshwater","Asymmetrical Body","No True Tissues","Choanocytes - Collar Cells, Flagellated","Water Canal System for Feeding","Ostia - Pores for Water Entry","Spongocoel - Central Cavity","Osculum - Single Exit","Pinacocytes - Outer Flat Cells","Spicules - Calcium/Silica Skeleton","Spongin Fibres - Protein Skeleton","Asexual: Gemmules (Freshwater), Budding","Sexual: Hermaphrodite, Cross-fertilization","Regeneration Ability","Sycon (Scypha) - Marine","Spongilla - Freshwater","Euspongia - Bath Sponge"]},
+      {name:"Phylum Cnidaria",hours:1.25,subs:["Tissue Level Organization","Radial Symmetry","Diploblastic: Ectoderm + Endoderm","Mesoglea - Jelly between Layers","Cnidocytes - Stinging Cells","Nematocysts - Coiled Thread for Prey Capture","Enteron/Gastrovascular Cavity","Single Opening - Mouth/Anus","Polyp Form - Sessile, Asexual","Medusa Form - Free-swimming, Sexual","Metagenesis - Alternation of Polyp & Medusa","Hydra - Only Polyp, Freshwater","Obelia - Both Polyp & Medusa","Aurelia - Jellyfish, Only Medusa","Physalia - Portuguese Man O' War","Corals - Skeleton-forming Colonies","Sea Anemone - Actinia, Sessile","Bioluminescence in Some","Nerve Net - Diffuse Nervous System"]},
+      {name:"Phylum Ctenophora & Platyhelminthes",hours:0.75,subs:["Ctenophora - Comb Jellies","8 Rows of Ciliated Comb Plates","Bioluminescence - Blue-green Light","Marine Only, No Cnidocytes","Pleurobrachia, Ctenoplana","Diploblastic, Radial Symmetry","Platyhelminthes - Flatworms","Triploblastic Acoelomates","Bilateral Symmetry","Dorsoventrally Flattened","No Anus - Incomplete Gut","Flame Cells - Protonephridia for Excretion","Planaria - Free-living, Freshwater","Fasciola hepatica - Liver Fluke, Parasite","Taenia solium - Tapeworm","Schistosoma - Blood Fluke","High Regeneration in Planaria","Hermaphrodite, Cross-fertilization"]},
+      {name:"Phylum Aschelminthes & Annelida",hours:1,subs:["Aschelminthes - Roundworms","Pseudocoelomates","Circular Cross-section","Complete Alimentary Canal","Separate Sexes - Sexual Dimorphism","Ascaris lumbricoides - Roundworm","Wuchereria bancrofti - Filaria","Ancylostoma - Hookworm","Enterobius - Pinworm","Annelida - Segmented Worms","True Coelomates","Metamerism - True Segmentation","Closed Blood Vascular System","Haemoglobin in Plasma","Nephridia - Excretion (like Kidneys)","Setae - Locomotion in Earthworm","Parapodia - Locomotion in Nereis","Pheretima posthuma - Earthworm","Nereis - Ragworm, Marine","Hirudinaria - Leech","Hirudin - Anticoagulant from Leech"]},
+      {name:"Phylum Arthropoda",hours:1.5,subs:["Largest Animal Phylum - 2/3 of All Animals","Jointed Appendages - Arthropod Meaning","Chitinous Exoskeleton","Moulting/Ecdysis - Shedding Exoskeleton","Segmented Body","Open Circulatory System - Haemocoel","Book Lungs, Trachea, Gills","Compound Eyes in Insects","Malpighian Tubules - Excretion","Head, Thorax, Abdomen in Insects","Cephalothorax in Arachnids","Class Crustacea - Prawns, Crabs, Daphnia","Class Myriapoda - Centipedes, Millipedes","Class Insecta - Largest Class","Class Arachnida - Spiders, Scorpions, Ticks","Periplaneta americana - Cockroach","Apis mellifera - Honey Bee","Bombyx mori - Silkworm","Anopheles - Malaria Vector","Pediculus - Louse","Economic Importance: Silk, Honey, Lac"]},
+      {name:"Phylum Mollusca & Echinodermata",hours:1,subs:["Mollusca - Second Largest Phylum","Soft Unsegmented Body","Mantle - Secretes Shell","Muscular Foot for Locomotion","Radula - Rasping Feeding Organ","Open Circulatory System (Except Cephalopods)","Pila globosa - Apple Snail","Unio - Freshwater Mussel","Pinctada - Pearl Oyster","Sepia - Cuttlefish","Loligo - Squid","Octopus - Ink Gland Defense","Chiton - Primitive Mollusc","Echinodermata - Spiny Skinned","Water Vascular System - Unique","Tube Feet - Locomotion & Feeding","Calcareous Endoskeleton","Pentamerous Radial Symmetry in Adult","Bilateral Larvae","Asterias - Starfish","Echinus - Sea Urchin","Cucumaria - Sea Cucumber","Ophiura - Brittle Star","Antedon - Feather Star","Regeneration Ability"]},
+      {name:"Phylum Hemichordata & Chordata",hours:1,subs:["Hemichordata - Worm-like Marine","Balanoglossus - Acorn Worm","Body: Proboscis, Collar, Trunk","Stomochord in Proboscis - Buccal Diverticulum","NOT True Notochord","Gill Slits Present","Enteropneusta & Pterobranchia","Link between Invertebrates & Chordates","Chordata - Defining Features","Notochord - Flexible Rod of Cells","Dorsal Hollow Nerve Cord - Above Gut","Pharyngeal Gill Slits - In Pharynx","Post-anal Tail - At Some Stage","Bilateral Symmetry, Triploblastic, Coelomate","Closed Circulatory System","Urochordata - Tunicates, Sea Squirts","Cephalochordata - Amphioxus (Branchiostoma)","Vertebrata - Backbone Present","Cranium Protects Brain","Exoskeleton: Scales, Feathers, Hair","Endoskeleton: Cartilage or Bone"]},
+      {name:"Cyclostomata & Chondrichthyes",hours:0.75,subs:["Cyclostomata - Jawless Fish","Most Primitive Vertebrates","Circular Suctorial Mouth - No Jaws","Slimy Skin - No Scales","Cartilaginous Skeleton","6-15 Pairs of Gills","Parasitic on Fish","Marine but Breed in Freshwater","Petromyzon - Lamprey","Myxine - Hagfish","Chondrichthyes - Cartilaginous Fish","Placoid Scales - Teeth-like","Mouth Ventral - Beneath Head","No Operculum - Gill Slits Exposed","Claspers in Males - Internal Fertilization","No Air Bladder","Dorsal Fin Prevents Rolling","Tail - Heterocercal (Unequal Lobes)","Scoliodon - Dogfish Shark","Pristis - Sawfish","Trygon - Sting Ray","Torpedo - Electric Ray","Carcharodon - Great White Shark"]},
+      {name:"Osteichthyes & Amphibia",hours:1,subs:["Osteichthyes - Bony Fish","Cycloid & Ctenoid Scales","Terminal Mouth","4 Pairs of Gills with Operculum","Air Bladder - Buoyancy","Homocercal Tail (Equal Lobes)","Poikilothermic - Cold Blooded","Lateral Line System - Pressure Detection","Marine: Exocoetus (Flying Fish)","Marine: Hippocampus (Sea Horse)","Marine: Anguilla (Eel)","Freshwater: Labeo rohita (Rohu)","Freshwater: Catla, Clarias (Catfish)","Amphibia - Dual Life","Poikilothermic, Cold Blooded","Moist Permeable Glandular Skin","Buccal Cavity Respiration","Cutaneous Respiration through Skin","3-Chambered Heart","2 Pairs of Limbs with Webbed Feet","Tympanum - External Ear","Tadpole - Aquatic Larva","Metamorphosis - Larva to Adult","Rana tigrina - Frog","Bufo - Toad","Salamandra - Salamander","Ichthyophis - Caecilian, Limbless"]},
+      {name:"Reptilia & Aves",hours:1,subs:["Reptilia - Creeping/Crawling Animals","First True Land Vertebrates","Poikilothermic","Dry Cornified Skin with Scales","Tympanum for Hearing","3-Chambered Heart (Crocodile - 4)","No External Ear Pinnae","Oviparous with Leathery Eggs","Terrestrial Eggs - No Water Dependency","Chelonia - Turtles & Tortoises","Crocodilia - Crocodile, Alligator","Squamata - Lizards & Snakes","Sphenodon - Tuatara, Living Fossil","Uromastix - Spiny-tailed Lizard","Naja - Cobra","Bungarus - Krait","Aves - Birds","Bipedal, Feathered","Homoiothermic - Warm Blooded","Forelimbs Modified to Wings","Hollow Pneumatic Bones - Lightweight","Air Sacs - Connected to Lungs","9 Pairs of Air Sacs","4-Chambered Heart","Beak - No Teeth in Modern Birds","Oviparous with Calcareous Eggs","Columba livia - Pigeon","Corvus - Crow","Pavo - Peacock","Struthio - Ostrich (Flightless)","Spheniscus - Penguin (Flightless)"]},
+      {name:"Mammalia",hours:1.5,subs:["Highest Organized Animals","Homoiothermic - Warm Blooded","Mammary Glands - Unique Feature","Hair/Fur on Body","External Pinnae (Ear)","4-Chambered Heart","Diaphragm for Respiration","Internal Fertilization","Viviparous - Young Born Alive","Dentition - Different Teeth Types","Incisors, Canines, Premolars, Molars","Heterodont Dentition","Prototheria - Egg-laying Mammals","Ornithorhynchus - Duck-billed Platypus","Tachyglossus - Echidna","Metatheria - Pouched Mammals (Marsupials)","Macropus - Kangaroo","Didelphis - Opossum","Eutheria - Placental Mammals","Primates - Gorilla, Chimpanzee, Human","Carnivora - Tiger, Lion, Dog, Cat","Chiroptera - Bat - Flying Mammal","Cetacea - Whale, Dolphin - Aquatic","Sirenia - Dugong, Sea Cow","Proboscidea - Elephant","Rodentia - Rats, Squirrels","Lagomorpha - Rabbits","Perissodactyla - Horse, Rhinoceros","Artiodactyla - Cow, Goat, Pig"]}
+    ]
+  }
+];
+
+// ══════════════ TIMETABLE ══════════════
+const DAYS = [
+  {day:1,hrs:3,ch:1,col:"var(--c1)",task:"Ch 1: Read fully — What is Living?, Diversity, basic definitions"},
+  {day:2,hrs:3,ch:1,col:"var(--c1)",task:"Ch 1: Taxonomic Categories + Aids, NCERT Qs"},
+  {day:3,hrs:3,ch:2,col:"var(--c2)",task:"Ch 2: 2-Kingdom vs 5-Kingdom systems, Whittaker's criteria"},
+  {day:4,hrs:3,ch:2,col:"var(--c2)",task:"Ch 2: Kingdom Monera — full read + notes"},
+  {day:5,hrs:3,ch:2,col:"var(--c2)",task:"Ch 2: Kingdom Protista — all types & examples"},
+  {day:6,hrs:3,ch:2,col:"var(--c2)",task:"Ch 2: Kingdom Fungi — all 4 classes with examples"},
+  {day:7,hrs:3,ch:2,col:"var(--c2)",task:"Ch 2: Viruses, Viroids, Lichens + Revision of Ch2"},
+  {day:8,hrs:3,ch:3,col:"var(--c3)",task:"Ch 3: Algae — 3 classes, features, diagrams"},
+  {day:9,hrs:3,ch:3,col:"var(--c3)",task:"Ch 3: Algae examples + Bryophytes start"},
+  {day:10,hrs:3,ch:3,col:"var(--c3)",task:"Ch 3: Bryophytes full + Pteridophytes start"},
+  {day:11,hrs:3,ch:3,col:"var(--c3)",task:"Ch 3: Pteridophytes complete + Gymnosperms start"},
+  {day:12,hrs:3,ch:3,col:"var(--c3)",task:"Ch 3: Gymnosperms full — life cycle + diagrams"},
+  {day:13,hrs:3,ch:3,col:"var(--c3)",task:"Ch 3: Angiosperms + Life Cycle types (Haplontic etc.)"},
+  {day:14,hrs:3,ch:3,col:"var(--c3)",task:"Ch 3: Alternation of Generations + Chapter Revision"},
+  {day:15,hrs:3,ch:4,col:"var(--c4)",task:"Ch 4: Basis of Classification — symmetry, coelom, etc."},
+  {day:16,hrs:3,ch:4,col:"var(--c4)",task:"Ch 4: Porifera + Coelenterata — full features & examples"},
+  {day:17,hrs:3,ch:4,col:"var(--c4)",task:"Ch 4: Platyhelminthes + Aschelminthes + Annelida"},
+  {day:18,hrs:3,ch:4,col:"var(--c4)",task:"Ch 4: Arthropoda + Mollusca + Echinodermata + Hemichordata"},
+  {day:19,hrs:3,ch:4,col:"var(--c4)",task:"Ch 4: Chordata — all 7 classes with examples"},
+  {day:20,hrs:3,ch:0,col:"#666",task:"FINAL REVISION — all 4 chapters, comparison charts, NCERT Qs"},
+];
+
+const ttGrid = document.getElementById('ttGrid');
+DAYS.forEach(d=>{
+  const el=document.createElement('div');
+  el.className='tt-day';
+  el.style.setProperty('--day-col',d.col);
+  el.innerHTML=`<div class="day-n">D${String(d.day).padStart(2,'0')}</div>
+    <div class="day-h">${d.hrs} hrs · ${d.ch>0?'CH '+d.ch:'REVIEW'}</div>
+    <div class="day-t">${d.task}</div>`;
+  ttGrid.appendChild(el);
+});
+
+// ══════════════ CHAPTER TOPICS VIEW + SUBTOPIC NODE MAP ══════════════
+let currentChapter = null;
+let currentTopic = null;
+let currentTopicIndex = 0;
+const nmEl = document.getElementById('nodemap');
+const tmEl = document.getElementById('topicmap');
+const topicsGrid = document.getElementById('topicsGrid');
+
+// Bento elements
+const bentoGrid      = document.getElementById('bentoGrid');
+const bentoProgFill  = document.getElementById('bentoProgFill');
+const bentoProgLabel = document.getElementById('bentoProgLabel');
+
+// ══ BENTO BUILD ══
+function buildBento(){
+  const chI   = CHAPTERS.indexOf(currentChapter);
+  const topI  = currentTopicIndex;
+  const color = currentChapter.color;
+  const subs  = currentTopic.subs;
+
+  bentoGrid.innerHTML = '';
+
+  subs.forEach((sub, i) => {
+    const done = isDone(chI, topI, i);
+    const card = document.createElement('div');
+    card.className = 'bn-card' + (done ? ' bn-done' : '');
+    card.style.setProperty('--bn-color', color);
+    card.style.setProperty('--i', i);
+    card.dataset.idx = i;
+    // derive a short 1-2 word keyword from the subtopic for the pill
+    const words = sub.split(/[\s\-–]+/);
+    const keyword = words.slice(0,2).join(' ');
+    const wordCount = words.length;
+    const readMin = Math.max(1, Math.round(wordCount * 0.4));
+
+    // first word for giant center display
+    const centerWord = words[0].replace(/[^A-Za-z0-9]/g,'') || String(i+1).padStart(2,'0');
+
+    card.innerHTML = `
+      <div class="bn-stamp"><span class="bn-stamp-label">${done ? 'UNDONE' : 'DONE'}</span></div>
+      <div class="bn-colorstrip"></div>
+      <div class="bn-midline"></div>
+      <div class="bn-ghost">${String(i+1).padStart(2,'0')}</div>
+      <div class="bn-center"><span class="bn-giant">${centerWord}</span></div>
+      <div class="bn-top">
+        <div class="bn-pill"><span class="bn-pill-dot"></span>${keyword}</div>
+        <span class="bn-vol">${String(i+1).padStart(2,'0')}</span>
+      </div>
+      <div class="bn-bottom">
+        <div class="bn-eyebrow">${currentChapter.short} · ${String(i+1).padStart(2,'0')} / ${subs.length}</div>
+        <div class="bn-label">${sub}</div>
+        <div class="bn-footer">
+          <div class="bn-tick">
+            <svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg>
+          </div>
+          <span class="bn-idx">~${readMin} min</span>
+          <span class="bn-action">${done ? 'DONE ✓' : 'MARK DONE'}</span>
+        </div>
+      </div>`;
+    card.addEventListener('click', (e) => bnCardClick(e, card, chI, topI, i, color));
+    bentoGrid.appendChild(card);
+  });
+
+  updateBentoProgress(chI, topI);
+}
+
+function openMap(idx){
+  currentChapter = CHAPTERS[idx];
+  const ch = currentChapter;
+  document.getElementById('nmTag').textContent = 'CH 0'+(idx+1);
+  document.getElementById('nmTitle').textContent = ch.title;
+  document.getElementById('nmHrs').textContent = ch.hours+' HOURS TOTAL';
+  document.getElementById('nmEyebrow').textContent = 'Chapter 0'+(idx+1)+' · Biology · NCERT';
+  // Hero title: split into 3 lines like home
+  const words = ch.title.split(' ');
+  const lastWord = words.pop();
+  const restWords = words.join('<br>');
+  document.getElementById('nmHeroTitle').innerHTML = restWords + '<br><em>' + lastWord + '</em>';
+  const totalSubs = ch.topics.reduce((a,t)=>a+t.subs.length,0);
+  document.getElementById('nmStatHrs').textContent = ch.hours;
+  document.getElementById('nmStatTopics').textContent = ch.topics.length;
+  document.getElementById('nmStatSubs').textContent = totalSubs+'+';
+  document.documentElement.style.setProperty('--nm-accent', ch.color);
+  nmEl.classList.add('active');
+  nmEl.scrollTop = 0;
+  document.body.style.overflow='hidden';
+  buildTopicCards();
+}
+
+function closeMap(){
+  nmEl.classList.remove('active');
+  document.body.style.overflow='';
+  topicsGrid.innerHTML = '';
+}
+
+// Per-topic color palettes — 8 unique accents per chapter family
+const TOPIC_PALETTES = [
+  // Ch1: Living World — yellow-green family, rotating hues
+  [
+    { bg:'#091a0a', color:'#c8ff00', bg2:'rgba(200,255,0,.12)',  border:'rgba(200,255,0,.25)'  },
+    { bg:'#0a1a0a', color:'#7fff5f', bg2:'rgba(127,255,95,.12)', border:'rgba(127,255,95,.25)' },
+    { bg:'#0c1a08', color:'#a8ff60', bg2:'rgba(168,255,96,.12)', border:'rgba(168,255,96,.25)' },
+    { bg:'#0a1c0c', color:'#58ffa0', bg2:'rgba(88,255,160,.12)', border:'rgba(88,255,160,.25)' },
+    { bg:'#0c1a10', color:'#c8ff00', bg2:'rgba(200,255,0,.1)',   border:'rgba(200,255,0,.2)'   },
+    { bg:'#091808', color:'#90ff50', bg2:'rgba(144,255,80,.12)', border:'rgba(144,255,80,.25)' },
+    { bg:'#0a1c06', color:'#bcff44', bg2:'rgba(188,255,68,.12)', border:'rgba(188,255,68,.25)' },
+    { bg:'#08180c', color:'#50ffb0', bg2:'rgba(80,255,176,.12)', border:'rgba(80,255,176,.25)' },
+  ],
+  // Ch2: Bio Classification — orange-red-amber family
+  [
+    { bg:'#1c0d05', color:'#ff9a70', bg2:'rgba(255,154,112,.15)', border:'rgba(255,154,112,.3)' },
+    { bg:'#1a0a08', color:'#ff6b35', bg2:'rgba(255,107,53,.15)',  border:'rgba(255,107,53,.3)'  },
+    { bg:'#1a0d00', color:'#ffb830', bg2:'rgba(255,184,48,.14)',  border:'rgba(255,184,48,.28)' },
+    { bg:'#1c0808', color:'#ff5050', bg2:'rgba(255,80,80,.14)',   border:'rgba(255,80,80,.28)'  },
+    { bg:'#180c08', color:'#ff8c42', bg2:'rgba(255,140,66,.14)',  border:'rgba(255,140,66,.28)' },
+    { bg:'#1a0a04', color:'#ffc060', bg2:'rgba(255,192,96,.13)',  border:'rgba(255,192,96,.26)' },
+    { bg:'#1c0806', color:'#ff4040', bg2:'rgba(255,64,64,.14)',   border:'rgba(255,64,64,.28)'  },
+    { bg:'#1a0c02', color:'#ffaa50', bg2:'rgba(255,170,80,.14)',  border:'rgba(255,170,80,.28)' },
+  ],
+  // Ch3: Plant Kingdom — cyan-teal-aqua family
+  [
+    { bg:'#021318', color:'#00d4ff', bg2:'rgba(0,212,255,.14)',  border:'rgba(0,212,255,.28)'  },
+    { bg:'#021518', color:'#00ffcc', bg2:'rgba(0,255,204,.13)',  border:'rgba(0,255,204,.26)'  },
+    { bg:'#021018', color:'#40c8ff', bg2:'rgba(64,200,255,.14)', border:'rgba(64,200,255,.28)' },
+    { bg:'#021818', color:'#00e8b0', bg2:'rgba(0,232,176,.13)',  border:'rgba(0,232,176,.26)'  },
+    { bg:'#021318', color:'#20dcff', bg2:'rgba(32,220,255,.14)', border:'rgba(32,220,255,.28)' },
+    { bg:'#021618', color:'#00ffd4', bg2:'rgba(0,255,212,.13)',  border:'rgba(0,255,212,.26)'  },
+    { bg:'#020e18', color:'#60b8ff', bg2:'rgba(96,184,255,.14)', border:'rgba(96,184,255,.28)' },
+    { bg:'#021818', color:'#00eec0', bg2:'rgba(0,238,192,.13)',  border:'rgba(0,238,192,.26)'  },
+  ],
+  // Ch4: Animal Kingdom — pink-magenta-violet family
+  [
+    { bg:'#180510', color:'#ff80c8', bg2:'rgba(255,128,200,.15)', border:'rgba(255,128,200,.3)' },
+    { bg:'#160412', color:'#ff3d9a', bg2:'rgba(255,61,154,.15)',  border:'rgba(255,61,154,.3)'  },
+    { bg:'#18050e', color:'#ff60a8', bg2:'rgba(255,96,168,.14)',  border:'rgba(255,96,168,.28)' },
+    { bg:'#140418', color:'#c060ff', bg2:'rgba(192,96,255,.14)',  border:'rgba(192,96,255,.28)' },
+    { bg:'#160614', color:'#ff50b8', bg2:'rgba(255,80,184,.14)',  border:'rgba(255,80,184,.28)' },
+    { bg:'#180418', color:'#a050ff', bg2:'rgba(160,80,255,.14)',  border:'rgba(160,80,255,.28)' },
+    { bg:'#160510', color:'#ff70d0', bg2:'rgba(255,112,208,.14)', border:'rgba(255,112,208,.28)'},
+    { bg:'#140218', color:'#d060ff', bg2:'rgba(208,96,255,.14)',  border:'rgba(208,96,255,.28)' },
+  ],
+];
+
+function buildTopicCards(){
+  const ch = currentChapter;
+  const chIdx = CHAPTERS.indexOf(ch);
+  const palette = TOPIC_PALETTES[chIdx] || TOPIC_PALETTES[0];
+  topicsGrid.innerHTML = '';
+
+  ch.topics.forEach((topic, ti) => {
+    const cs = palette[ti % palette.length];
+    const card = document.createElement('div');
+    card.className = 'tp-card';
+    card.style.setProperty('--tp-bg', cs.bg);
+    card.style.setProperty('--tp-badge-bg', cs.bg2);
+    card.style.setProperty('--tp-badge-color', cs.color);
+    card.style.setProperty('--tp-badge-border', cs.border);
+    card.onclick = () => openTopicMap(ti);
+
+    const volNum = String((chIdx * 20) + ti + 1).padStart(3,'0');
+    const pullQuote = topic.subs[0] || topic.name;
+    const pct = Math.min(100, Math.round((topic.hours / ch.hours) * 100));
+    // difficulty label based on subtopic count
+    const diff = topic.subs.length <= 4 ? 'Easy' : topic.subs.length <= 7 ? 'Med' : 'Hard';
+    // subtopic index lines (first 4)
+    const indexLines = topic.subs.slice(0,4).map((s,i) =>
+      `<div class="tp-index-item"><span class="tp-index-num">${String(i+1).padStart(2,'0')}</span>${s}</div>`
+    ).join('');
+    // remaining count
+    const remaining = topic.subs.length - 4;
+
+    const keyFact = topic.subs[0] || topic.name;
+
+    // Visual panel: show first 5 subtopics as beautiful indexed rows
+    const LIST_SHOW = 5;
+    const subListHtml = topic.subs.slice(0, LIST_SHOW).map((s, si) => {
+      const done = isDone(chIdx, ti, si);
+      return `<div class="tp-sub-row${done ? ' tsr-done' : ''}">
+        <span class="tp-sub-n">${String(si+1).padStart(2,'0')}</span>
+        <span class="tp-sub-text">${s}</span>
+        <span class="tp-sub-check"></span>
+      </div>`;
+    }).join('');
+    const listMore = topic.subs.length - LIST_SHOW;
+    const subMoreHtml = listMore > 0
+      ? `<div class="tp-sub-more">+${listMore} more subtopics</div>`
+      : '';
+
+    // Body panel: compact chips for all subtopics
+    const CHIP_SHOW = 14;
+    const chipsHtml = topic.subs.slice(0, CHIP_SHOW).map((s, si) => {
+      const done = isDone(chIdx, ti, si);
+      return `<span class="tp-chip${done ? ' tc-done' : ''}" title="${s}"><span class="tp-chip-dot"></span>${s}</span>`;
+    }).join('');
+    const extraCount = topic.subs.length - CHIP_SHOW;
+    const moreChipHtml = extraCount > 0 ? `<span class="tp-chip-more">+${extraCount}</span>` : '';
+
+    const doneCnt = topicProgress(chIdx, ti);
+    const progPct  = topic.subs.length ? Math.round(doneCnt / topic.subs.length * 100) : 0;
+
+    card.innerHTML = `
+      <div class="tp-visual">
+        <div class="tp-visual-grid"></div>
+        <div class="tp-visual-noise"></div>
+        <div class="tp-visual-orb tp-orb-1"></div>
+        <div class="tp-visual-orb tp-orb-2"></div>
+        <div class="tp-ghost-num">${String(ti+1).padStart(2,'0')}</div>
+
+        <div class="tp-visual-top">
+          <div class="tp-badge"><span class="tp-badge-dot"></span>Topic ${String(ti+1).padStart(2,'0')}</div>
+          <span class="tp-issue-tag">${diff}</span>
+        </div>
+
+        <div class="tp-visual-bottom">
+          <div class="tp-journal">Ch ${String(chIdx+1).padStart(2,'0')} · ${topic.hours}h · ${topic.subs.length} subs</div>
+          <h3 class="tp-year-big">${topic.name}</h3>
+          <div class="tp-prog-row">
+            <div class="tp-prog-track"><div class="tp-prog-fill" style="width:${progPct}%"></div></div>
+            <span class="tp-prog-label">${doneCnt}/${topic.subs.length}</span>
+          </div>
+          <div class="tp-card-footer">
+            <span class="tp-card-cta">Explore subtopics</span>
+            <span class="tp-card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    `;
+    if (topicProgress(chIdx, ti) === topic.subs.length && topic.subs.length > 0)
+      card.classList.add('tp-complete');
+    topicsGrid.appendChild(card);
+  });
+}
+
+// ══════════════ SUBTOPIC BENTO VIEW ══════════════
+function openTopicMap(topicIdx){
+  currentTopicIndex = topicIdx;
+  currentTopic = currentChapter.topics[topicIdx];
+  const chI   = CHAPTERS.indexOf(currentChapter);
+  const color = currentChapter.color;
+
+  // Wire hero elements
+  tmEl.style.setProperty('--tm-color', color);
+  document.getElementById('tmTag').textContent   = 'TOPIC ' + String(topicIdx + 1).padStart(2, '0');
+  document.getElementById('tmTitle').textContent = currentTopic.name;
+  document.getElementById('tmBreadcrumb').textContent =
+    'CHAPTER ' + String(chI + 1).padStart(2,'0') + ' · ' + currentChapter.short.toUpperCase();
+  document.getElementById('tmStatHrs').textContent  = currentTopic.hours;
+  document.getElementById('tmStatSubs').textContent = currentTopic.subs.length;
+  document.getElementById('tmStatDone').textContent = topicProgress(chI, topicIdx);
+
+  // Force re-run slide-in animation
+  tmEl.classList.remove('active');
+  void tmEl.offsetWidth;
+  tmEl.classList.add('active');
+  buildBento();
+}
+
+function closeTopicMap(){
+  tmEl.classList.remove('active');
+}
+
+// ── PROGRESS STATE ──
+function progressKey(chI, topI, subI){ return `prog_${chI}_${topI}_${subI}`; }
+function isDone(chI, topI, subI){ return localStorage.getItem(progressKey(chI,topI,subI)) === '1'; }
+function setDone(chI, topI, subI, val){ localStorage.setItem(progressKey(chI,topI,subI), val?'1':'0'); }
+function topicProgress(chI, topI){
+  const subs = CHAPTERS[chI].topics[topI].subs;
+  return subs.filter((_,i) => isDone(chI,topI,i)).length;
+}
+
+// ── CINEMATIC PARTICLE SYSTEM ──
+let sparks   = [];   // velocity-streak sparks
+let debris   = [];   // tumbling rectangular chunks
+let rings    = [];   // shockwave rings
+let beams    = [];   // instant starburst radial lines
+let flashes  = [];   // central flash disks
+
+const stageFlashEl = document.getElementById('stageFlash');
+
+function hexToRgb(hex){
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+// ── Bento particle canvas overlay ──
+let bentoFxCanvas = null, bentoFxCtx = null, bentoFxFrame = 0;
+
+function ensureBentoFxCanvas(){
+  if (bentoFxCanvas) return;
+  bentoFxCanvas = document.createElement('canvas');
+  bentoFxCanvas.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:10;width:100%;height:100%';
+  document.getElementById('bentoStage').appendChild(bentoFxCanvas);
+  resizeBentoFxCanvas();
+  window.addEventListener('resize', resizeBentoFxCanvas);
+  startBentoParticleLoop();
+}
+
+function resizeBentoFxCanvas(){
+  if (!bentoFxCanvas) return;
+  const r = document.getElementById('bentoStage').getBoundingClientRect();
+  bentoFxCanvas.width  = r.width;
+  bentoFxCanvas.height = r.height;
+}
+
+function startBentoParticleLoop(){
+  function frame(){
+    if (!bentoFxCanvas) return;
+    const ctx = bentoFxCtx || (bentoFxCtx = bentoFxCanvas.getContext('2d'));
+    ctx.clearRect(0, 0, bentoFxCanvas.width, bentoFxCanvas.height);
+    updateParticles();
+    drawParticles(ctx);
+    bentoFxFrame = requestAnimationFrame(frame);
+  }
+  bentoFxFrame = requestAnimationFrame(frame);
+}
+
+function spawnFlash(x, y, color){
+  ensureBentoFxCanvas();
+  stageFlashEl.style.background = `radial-gradient(circle at ${x}px ${y}px, ${color}55 0%, ${color}22 30%, transparent 60%)`;
+  stageFlashEl.classList.remove('flash-go');
+  void stageFlashEl.offsetWidth;
+  stageFlashEl.classList.add('flash-go');
+  flashes.push({ x, y, r:0, maxR:55, alpha:0.9, color:'#ffffff', decay:0.07 });
+  flashes.push({ x, y, r:0, maxR:30, alpha:1.0, color, decay:0.05 });
+}
+
+function spawnBurst(x, y, color, count=14){
+  spawnFlash(x, y, color);
+
+  // Starburst beams — 8 max
+  const beamCount = 8;
+  for(let i=0;i<beamCount;i++){
+    const a = (i/beamCount)*Math.PI*2 + Math.random()*0.25;
+    beams.push({ x, y, angle:a, len:22+Math.random()*24, alpha:0.8, decay:0.11, color, width:1.2+Math.random()*0.6 });
+  }
+
+  // Velocity-streak sparks — capped at count
+  const cap = Math.min(count, 16);
+  for(let i=0;i<cap;i++){
+    const a = Math.random()*Math.PI*2;
+    const spd = 3.5 + Math.random()*7;
+    const isLong = Math.random() < 0.4;
+    sparks.push({
+      x, y,
+      vx: Math.cos(a)*spd, vy: Math.sin(a)*spd,
+      len: isLong ? 14+Math.random()*16 : 4+Math.random()*6,
+      alpha: 1, color,
+      decay: isLong ? 0.026+Math.random()*0.01 : 0.038+Math.random()*0.018,
+      gravity: 0.08, drag: 0.94
+    });
+  }
+
+  // Debris — max 4
+  for(let i=0;i<4;i++){
+    const a = Math.random()*Math.PI*2;
+    debris.push({
+      x, y,
+      vx: Math.cos(a)*(2+Math.random()*3.5), vy: Math.sin(a)*(2+Math.random()*3.5),
+      w: 3+Math.random()*3, h: 2+Math.random()*2.5,
+      rot: Math.random()*Math.PI*2, spin:(Math.random()-.5)*0.22,
+      alpha:1, decay:0.03, gravity:0.07, drag:0.95, color
+    });
+  }
+
+  // 2 rings max
+  rings.push({ x, y, r:2, maxR:70,  alpha:0.85, color, width:2,   speed:0.13 });
+  setTimeout(()=> rings.push({ x, y, r:2, maxR:115, alpha:0.5, color, width:1.2, speed:0.08 }), 100);
+}
+
+function spawnUndo(x, y, color){
+  // Implosion: particles fly inward, desaturated
+  const cnt = 8;
+  for(let i=0;i<cnt;i++){
+    const a = (i/cnt)*Math.PI*2;
+    const d = 55 + Math.random()*25;
+    sparks.push({
+      x: x + Math.cos(a)*d, y: y + Math.sin(a)*d,
+      vx: -Math.cos(a)*3, vy: -Math.sin(a)*3,
+      len:8, alpha:0.7,
+      color:'rgba(180,180,180,1)',
+      decay:0.045, gravity:0, drag:0.92, glow:3
+    });
+  }
+  rings.push({ x, y, r:30, maxR:0, alpha:0.5, color, width:1, speed:0.15, implode:true });
+}
+
+function updateParticles(){
+  sparks = sparks.filter(p=>p.alpha>0.02);
+  sparks.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    p.vy+=p.gravity||0;
+    p.vx*=p.drag; p.vy*=p.drag;
+    p.alpha-=p.decay;
+  });
+
+  debris = debris.filter(p=>p.alpha>0.02);
+  debris.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    p.vy+=p.gravity; p.vx*=p.drag; p.vy*=p.drag;
+    p.rot+=p.spin; p.alpha-=p.decay;
+  });
+
+  rings = rings.filter(r=>r.alpha>0.01 && (r.implode ? r.r>0 : r.r<r.maxR*1.05));
+  rings.forEach(r=>{
+    if(r.implode){ r.r = Math.max(0, r.r - r.maxR*r.speed); }
+    else         { r.r += (r.maxR - r.r) * r.speed; }
+    r.alpha -= 0.018;
+  });
+
+  beams = beams.filter(b=>b.alpha>0.01);
+  beams.forEach(b=>{ b.alpha-=b.decay; b.len*=0.92; });
+
+  flashes = flashes.filter(f=>f.alpha>0.01);
+  flashes.forEach(f=>{ f.r+=(f.maxR-f.r)*0.25; f.alpha-=f.decay; });
+}
+
+function drawParticles(ctx){
+  if(!sparks.length && !debris.length && !rings.length && !beams.length && !flashes.length) return;
+  ctx.save();
+
+  // ─ Flash disks in screen space (no transform) ─
+  if(flashes.length){
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.globalCompositeOperation = 'lighter';
+    flashes.forEach(f=>{
+      if(f.r < 1) return;
+      const grad = ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,f.r);
+      grad.addColorStop(0, f.color);
+      grad.addColorStop(0.4, f.color.startsWith('#') ? f.color+'66' : f.color);
+      grad.addColorStop(1, 'transparent');
+      ctx.globalAlpha = f.alpha;
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill();
+    });
+  }
+
+  // Screen-space only (bento has no viewport transform)
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.globalCompositeOperation = 'lighter';
+
+  // ─ Rings — one shadowBlur for the batch ─
+  if(rings.length){
+    ctx.shadowBlur = 10;
+    rings.forEach(r=>{
+      ctx.globalAlpha = r.alpha * 0.75;
+      ctx.strokeStyle = r.color;
+      ctx.lineWidth = r.width;
+      ctx.shadowColor = r.color;
+      ctx.beginPath(); ctx.arc(r.x,r.y,r.r,0,Math.PI*2); ctx.stroke();
+    });
+    ctx.shadowBlur = 0;
+  }
+
+  // ─ Beams — one pass, no per-beam shadow ─
+  if(beams.length){
+    ctx.lineCap = 'round';
+    ctx.shadowBlur = 8;
+    beams.forEach(b=>{
+      ctx.globalAlpha = b.alpha;
+      ctx.strokeStyle = b.color;
+      ctx.lineWidth = b.width;
+      ctx.shadowColor = b.color;
+      ctx.beginPath();
+      ctx.moveTo(b.x, b.y);
+      ctx.lineTo(b.x+Math.cos(b.angle)*b.len, b.y+Math.sin(b.angle)*b.len);
+      ctx.stroke();
+    });
+    ctx.shadowBlur = 0;
+  }
+
+  // ─ Sparks — tapered gradient lines, no per-spark shadow ─
+  if(sparks.length){
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 1.4;
+    sparks.forEach(p=>{
+      const spd = Math.sqrt(p.vx*p.vx+p.vy*p.vy)||1;
+      const nx=p.vx/spd, ny=p.vy/spd;
+      const tX=p.x-nx*p.len*Math.min(1,spd/5);
+      const tY=p.y-ny*p.len*Math.min(1,spd/5);
+      const g=ctx.createLinearGradient(p.x,p.y,tX,tY);
+      g.addColorStop(0,`rgba(255,255,255,${p.alpha})`);
+      g.addColorStop(0.4, p.color+(Math.round(p.alpha*180).toString(16).padStart(2,'0')));
+      g.addColorStop(1,'transparent');
+      ctx.globalAlpha=p.alpha;
+      ctx.strokeStyle=g;
+      ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(tX,tY); ctx.stroke();
+    });
+  }
+
+  // ─ Debris — small rects, single shadow pass ─
+  if(debris.length){
+    ctx.shadowBlur = 6;
+    debris.forEach(p=>{
+      ctx.save();
+      ctx.globalAlpha=p.alpha*0.8;
+      ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle=p.color; ctx.shadowColor=p.color;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+    });
+    ctx.shadowBlur=0;
+  }
+
+  ctx.restore();
+}
+
+// ── BENTO ANIMATION HELPERS ──
+function spawnBentoBurst(x, y, color, count){ spawnBurst(x, y, color, count); }
+function spawnBentoUndo(x, y, color){ spawnUndo(x, y, color); }
+
+function spawnBentoFlash(x, y, color){
+  stageFlashEl.style.background = `radial-gradient(circle at ${x}px ${y}px, ${color}44 0%, ${color}18 30%, transparent 65%)`;
+  stageFlashEl.classList.remove('flash-go');
+  void stageFlashEl.offsetWidth;
+  stageFlashEl.classList.add('flash-go');
+}
+
+function spawnBentoDoneTag(x, y, color, isDoneNow){
+  const tag = document.createElement('div');
+  tag.className = 'done-tag';
+  tag.style.left = x + 'px';
+  tag.style.top  = y + 'px';
+  tag.style.setProperty('--dt-color', color);
+  if (isDoneNow) {
+    tag.innerHTML = `<div class="dt-pill"><div class="dt-check"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div><span class="dt-label">DONE</span></div>`;
+    tag.classList.add('dt-lift');
+    doneTagLayer.appendChild(tag);
+    setTimeout(()=>{ tag.classList.add('dt-exit-wrap'); tag.querySelector('.dt-pill').classList.add('dt-exit'); setTimeout(()=>tag.remove(),520); }, 1400);
+  } else {
+    tag.innerHTML = `<div class="dt-undo">✕ &nbsp;UNDONE</div>`;
+    doneTagLayer.appendChild(tag);
+    setTimeout(()=>tag.remove(), 680);
+  }
+}
+
+function spawnBentoAllDoneTag(x, y, color){
+  const tag = document.createElement('div');
+  tag.className = 'dt-all-done';
+  tag.style.left = x + 'px';
+  tag.style.top  = y + 'px';
+  tag.style.setProperty('--dt-color', color);
+  tag.innerHTML = `<div class="dt-all-pill"><div class="dt-check" style="width:28px;height:28px"><svg viewBox="0 0 12 12" style="width:15px;height:15px"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div><span class="dt-label" style="font-size:15px">ALL DONE!</span></div>`;
+  doneTagLayer.appendChild(tag);
+  setTimeout(()=>{ tag.classList.add('dt-all-exit'); setTimeout(()=>tag.remove(),720); }, 2400);
+}
+
+// ── DONE TAG LAYER ──
+const doneTagLayer = document.getElementById('doneTagLayer');
+
+function flashWipeCard(card, isDoneNow, clickX, clickY){
+  // Update stamp label text
+  const lbl = card.querySelector('.bn-stamp-label');
+  if (lbl) lbl.textContent = isDoneNow ? 'DONE' : 'UNDONE';
+
+  // Spawn two ripple rings at click position
+  ['','bn-ripple-2'].forEach(extra => {
+    const r = document.createElement('div');
+    r.className = 'bn-ripple' + (extra ? ' '+extra : '');
+    r.style.left = clickX + 'px';
+    r.style.top  = clickY + 'px';
+    r.style.setProperty('--bn-color', getComputedStyle(card).getPropertyValue('--bn-color').trim());
+    card.appendChild(r);
+    setTimeout(() => r.remove(), 900);
+  });
+
+  // Stamp overlay
+  card.classList.remove('bn-stamping', 'bn-unstamping');
+  void card.offsetWidth;
+  card.classList.add(isDoneNow ? 'bn-stamping' : 'bn-unstamping');
+  setTimeout(() => card.classList.remove('bn-stamping', 'bn-unstamping'), 650);
+}
+
+function flashWipeStage(color){
+  const stage = document.getElementById('bentoStage');
+  const el = document.createElement('div');
+  el.className = 'stage-all-done-flash';
+  el.style.setProperty('--bn-color', color);
+  stage.appendChild(el);
+  setTimeout(() => el.remove(), 1200);
+}
+
+function bnCardClick(e, card, chI, topI, subIdx, color){
+  const nowDone = !isDone(chI, topI, subIdx);
+  setDone(chI, topI, subIdx, nowDone);
+
+  card.classList.toggle('bn-done', nowDone);
+  card.querySelector('.bn-action').textContent = nowDone ? 'DONE ✓' : 'MARK DONE';
+
+  // Get click coords relative to card
+  const rect = card.getBoundingClientRect();
+  const cx = e.clientX - rect.left;
+  const cy = e.clientY - rect.top;
+
+  flashWipeCard(card, nowDone, cx, cy);
+
+  // All-done: stage radial flash
+  if (nowDone && topicProgress(chI, topI) === currentTopic.subs.length) {
+    setTimeout(() => flashWipeStage(color), 260);
+  }
+
+  updateBentoProgress(chI, topI);
+  updateCardProgress(chI, topI);
+}
+
+function updateBentoProgress(chI, topI){
+  const total = CHAPTERS[chI].topics[topI].subs.length;
+  const done  = topicProgress(chI, topI);
+  const pct   = total ? Math.round(done/total*100) : 0;
+  bentoProgFill.style.width = pct + '%';
+  bentoProgLabel.textContent = done + ' / ' + total;
+  const sd = document.getElementById('tmStatDone');
+  if (sd) sd.textContent = done;
+}
+
+
+function updateCardProgress(chI, topI){
+  const cards = document.querySelectorAll('.tp-card');
+  const card = cards[topI];
+  if (!card) return;
+  const total = CHAPTERS[chI].topics[topI].subs.length;
+  const done = topicProgress(chI, topI);
+  const pct = Math.round(done/total*100);
+  const bar = card.querySelector('.tp-prog-fill');
+  const label = card.querySelector('.tp-prog-label');
+  if (bar) bar.style.width = pct + '%';
+  if (label) label.textContent = done + '/' + total;
+  if (pct === 100) card.classList.add('tp-complete');
+  else card.classList.remove('tp-complete');
+}
+
+// Key handlers
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
+    if(tmEl.classList.contains('active')) closeTopicMap();
+    else if(nmEl.classList.contains('active')) closeMap();
+  }
+});
+</script>
+</body>
+</html>
